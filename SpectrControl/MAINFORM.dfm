@@ -1,0 +1,1217 @@
+object Main: TMain
+  Left = 160
+  Top = 134
+  Caption = #1044#1060#1057'-52'
+  ClientHeight = 678
+  ClientWidth = 969
+  Color = 15132390
+  DefaultMonitor = dmMainForm
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  Icon.Data = {
+    0000010001002020000000000000A80800001600000028000000200000004000
+    0000010008000000000080040000000000000000000000010000000000000000
+    0000000080000080000000808000800000008000800080800000C0C0C000C0DC
+    C000F0CAA600CCFFFF0099FFFF0066FFFF0033FFFF00FFCCFF00CCCCFF0099CC
+    FF0066CCFF0033CCFF0000CCFF00FF99FF00CC99FF009999FF006699FF003399
+    FF000099FF00FF66FF00CC66FF009966FF006666FF003366FF000066FF00FF33
+    FF00CC33FF009933FF006633FF003333FF000033FF00CC00FF009900FF006600
+    FF003300FF00FFFFCC00CCFFCC0099FFCC0066FFCC0066FFCC0033FFCC0000FF
+    CC00FFCCCC00CCCCCC0099CCCC0066CCCC0033CCCC0000CCCC00FF99CC00CC99
+    CC009999CC006699CC003399CC000099CC00FF66CC00CC66CC009966CC006666
+    CC003366CC000066CC00FF33CC00CC33CC009933CC006633CC003333CC000033
+    CC00FF00CC00CC00CC009900CC006600CC003300CC000000CC00FFFF9900CCFF
+    990099FF990066FF990033FF990000FF9900FFCC9900CCCC990099CC990066CC
+    990033CC990000CC9900FF999900CC9999009999990066999900339999000099
+    9900FF669900CC66990099669900666699003366990000669900FF339900CC33
+    990099339900663399003333990000339900FF009900CC009900990099006600
+    99003300990000009900FFFF6600CCFF660099FF660066FF660033FF660000FF
+    6600FFCC6600CCCC660099CC660066CC660033CC660000CC6600FF996600CC99
+    660099996600669966003399660000996600FF666600CC666600996666006666
+    66003366660000666600FF336600CC3366009933660066336600333366000033
+    6600FF006600CC00660099006600660066003300660000006600FFFF3300CCFF
+    330099FF330066FF330033FF330000FF3300FFCC3300CCCC330099CC330066CC
+    330033CC330000CC3300FF993300CC9933009999330066993300339933000099
+    3300FF663300CC66330099663300666633003366330000663300FF333300CC33
+    330099333300663333003333330000333300FF003300CC003300990033006600
+    33003300330000003300CCFF000099FF000066FF000033FF0000FFCC0000CCCC
+    000099CC000066CC000033CC000000CC0000FF990000CC990000999900006699
+    00003399000000990000FF660000CC6600009966000066660000006600003366
+    0000FF330000CC33000099330000663300003333000000330000CC0000009900
+    000066000000330000000000DD000000BB000000AA0000008800000077000000
+    5500000044000000220000DD000000BB000000AA000000880000007700000055
+    00000044000000220000DDDDDD00555555007777770077777700444444002222
+    22001111110077000000550000004400000022000000F0FBFF00A4A0A0008080
+    80000000FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF000000
+    0000000000000000000000000000000000000000000000000000000000000000
+    0000000000000000000000000000000000000000000000000000000000000000
+    0000000000000000000000000000000000000000000000000000000000D30000
+    0000ECECECECECECECECECECECECECECEC00000000000000000000D3D3D30000
+    00EBEBF7F7F7F7F7F7F7F7F7F7F7F707EBEB00000000000000D3D3D3D3D30000
+    00EBFFEB07F7F7F7F7F7F7F7F7F707EBFFEB0000000000D3D3D3D3D3D3D30000
+    005DEBFFEB07F7F7F7F7F7F7F707EBFFEB5D0000D3D3D3D3D3D3D3D36F6F0000
+    00EC5DEBFFEB07F7F7F7F7F707EBFFEB0707D3D3D3D3D3D3D36F6F6F6F6F0000
+    00EF5D07EBFFEB07F7F7F707EBFFEB075555D3D3D3D36F6F6F6F6F6F6F6F0000
+    00EF5D0707EBFFEB07F707EBFFEB55555555D36F6F6F6F6F6F6F6F6F6F6F0000
+    00005D5D0707EBFFEB07EBFFEB55141414146F6F6F6F6F6F6F6F6F6F6F6F0000
+    00005D5D070707EBFFEBFFEB0714141414154E4E4E4E4E4E4E4E4E4E4E4E0000
+    00005D5D07070707FFFFFF07072B121212154E4E4E4E4E4E4E4E4E4E4E4E0000
+    00005D07EBEBEB07EBFFEB07072B2B0C121242424E4E4E4E4E4E4E4E4E4E0000
+    00005D07EB07EB5DEBFFEB5D072B2B2B0C3B4242424242424E4E4E4E4E4E0000
+    0000EFEB07EBEB5DEBFFEB5D5D072B2B2B3B3B4242424242424242424E4E0000
+    00EF5D07EBEBEB5DEBFFEB5D5D5D072BD0D0603B3B4242424242424242420000
+    EFEDEDF7EBEB075DEBFFEB5D5D5D07B3D0D0D0603B3B3B4242424242424200EF
+    EDEDF707F707075DEBFFEB5D5D070000B3D0D0D0603B3B3B3B4242424242EFED
+    EDF707F7EF000707EBFFEB5D0700000000B3D0D0D0603B3B3B3B3B424242EDED
+    F707F7EDEF000007EBFFEB07000000000000B3D0D0D060603B3B3B3B3B42EDF7
+    07F7EDEF0000000007FF070000000000000000B3D0D0D060603B3C3B3B3BF707
+    F7EDEF0000000000000700000000000000000000B3D0D0D060603B3B3B3B07F7
+    EDEF00000000000000000000000000000000000000B3D0D0D06060603B3CF7ED
+    EDEF0000000000000000000000000000000000000000B3D0D0D060606060EDED
+    EF00000000000000000000000000000000000000000000B3D0D0D0606060EDEF
+    000000000000000000000000000000000000000000000000B3D0D0D06060EF00
+    00000000000000000000000000000000000000000000000000B3D0D0D0600000
+    0000000000000000000000000000000000000000000000000000B3D0D0D00000
+    000000000000000000000000000000000000000000000000000000B3D0D00000
+    00000000000000000000000000000000000000000000000000000000B3D00000
+    0000000000000000000000000000000000000000000000000000000000B30000
+    0000000000000000000000000000000000000000000000000000000000000000
+    0000000000000000000000000000000000000000000000000000000000000000
+    0000000000000000000000000000000000000000000000000000000000000000
+    000000000000000000000000000000000000000000000000000000000000}
+  OldCreateOrder = False
+  Position = poScreenCenter
+  Scaled = False
+  ShowHint = True
+  WindowState = wsMaximized
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnShow = FormShow
+  DesignSize = (
+    969
+    678)
+  PixelsPerInch = 96
+  TextHeight = 13
+  object pnSpectr: TPanel
+    Left = 0
+    Top = 26
+    Width = 969
+    Height = 390
+    Anchors = [akLeft, akTop, akRight, akBottom]
+    BevelInner = bvRaised
+    Color = 15132390
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clRed
+    Font.Height = -200
+    Font.Name = 'Arial'
+    Font.Style = [fsBold]
+    ParentFont = False
+    TabOrder = 0
+    DesignSize = (
+      969
+      390)
+    object Label4: TLabel
+      Left = 222
+      Top = 361
+      Width = 593
+      Height = 19
+      Alignment = taCenter
+      Anchors = [akBottom]
+      Caption = 
+        #1044#1083#1103' '#1074#1099#1093#1086#1076#1072' '#1080#1079' '#1088#1077#1078#1080#1084#1072' '#1095#1072#1089#1090#1086#1090#1086#1084#1077#1088#1072' '#1085#1072#1078#1084#1080#1090#1077' '#1080' '#1091#1076#1077#1088#1078#1080#1074#1072#1081#1090#1077' '#1082#1083#1072#1074#1080#1096#1091' E' +
+        'sc'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clRed
+      Font.Height = -16
+      Font.Name = 'Arial'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object mbox: TPaintBox
+      Left = 2
+      Top = 2
+      Width = 965
+      Height = 386
+      Align = alClient
+      Color = 15132390
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clRed
+      Font.Height = -16
+      Font.Name = 'Arial'
+      Font.Style = []
+      ParentColor = False
+      ParentFont = False
+      ParentShowHint = False
+      PopupMenu = mboxmenu
+      ShowHint = False
+      OnMouseDown = mboxMouseDown
+      OnMouseMove = mboxMouseMove
+      OnMouseUp = mboxMouseUp
+      OnPaint = mboxPaint
+      ExplicitLeft = 0
+    end
+  end
+  object cbMenuBar: TControlBar
+    Left = 0
+    Top = 0
+    Width = 969
+    Height = 26
+    Anchors = [akLeft, akTop, akRight]
+    AutoSize = True
+    BevelEdges = []
+    TabOrder = 1
+    object ToolBar1: TToolBar
+      Left = 11
+      Top = 2
+      Width = 238
+      Height = 22
+      Align = alClient
+      Caption = 'tbControl'
+      Customizable = True
+      DockSite = True
+      EdgeBorders = [ebLeft, ebRight, ebBottom]
+      EdgeInner = esNone
+      EdgeOuter = esNone
+      Images = ilTool
+      TabOrder = 0
+      Transparent = True
+      object ToolButton1: TToolButton
+        Left = 0
+        Top = 0
+        Hint = #1047#1072#1075#1088#1091#1079#1080#1090#1100' '#1085#1072#1073#1086#1088' '#1089#1087#1077#1082#1090#1088#1086#1074
+        Caption = 'tbOpenBase'
+        ImageIndex = 0
+        OnClick = tbOpenBaseClick
+      end
+      object ToolButton2: TToolButton
+        Left = 23
+        Top = 0
+        Hint = #1057#1086#1093#1088#1072#1085#1080#1090#1100' '#1085#1072#1073#1086#1088' '#1089#1087#1077#1082#1090#1088#1086#1074
+        Caption = 'tbNewBase'
+        ImageIndex = 1
+        OnClick = tbNewBaseClick
+      end
+      object ToolButton3: TToolButton
+        Left = 46
+        Top = 0
+        Width = 12
+        Caption = 'tbSplitter1'
+        ImageIndex = 6
+        Style = tbsSeparator
+      end
+      object ToolButton4: TToolButton
+        Left = 58
+        Top = 0
+        Hint = #1063#1072#1089#1090#1086#1090#1086#1084#1077#1088
+        Caption = 'tbCymometr'
+        ImageIndex = 2
+        OnClick = tbCymometrClick
+      end
+      object ToolButton5: TToolButton
+        Left = 81
+        Top = 0
+        Hint = #1042' '#1085#1072#1095#1072#1083#1086' '#1096#1082#1072#1083#1099
+        Caption = 'tbInit'
+        ImageIndex = 3
+        OnClick = tbInitClick
+      end
+      object ToolButton6: TToolButton
+        Left = 104
+        Top = 0
+        Hint = #1053#1072#1089#1090#1088#1086#1081#1082#1080
+        Caption = 'tbPar'
+        ImageIndex = 4
+        OnClick = tbParClick
+      end
+      object ToolButton7: TToolButton
+        Left = 127
+        Top = 0
+        Hint = #1059#1087#1088#1072#1074#1083#1077#1085#1080#1077' '#1091#1089#1090#1072#1085#1086#1074#1082#1086#1081
+        Caption = 'tbDFS'
+        ImageIndex = 5
+        OnClick = tbDFSClick
+      end
+      object ToolButton8: TToolButton
+        Left = 150
+        Top = 0
+        Width = 12
+        Caption = 'tbSplitter2'
+        ImageIndex = 6
+        Style = tbsSeparator
+      end
+      object btnGoToPosition: TToolButton
+        Left = 162
+        Top = 0
+        Hint = #1050' '#1079#1072#1076#1072#1085#1085#1086#1081' '#1090#1086#1095#1082#1077' '#1076#1080#1072#1087#1072#1079#1086#1085#1072
+        Caption = 'btnGoToPosition'
+        ImageIndex = 7
+        OnClick = btnGoToPositionClick
+      end
+      object btn1: TToolButton
+        Left = 185
+        Top = 0
+        Width = 8
+        Caption = 'btn1'
+        ImageIndex = 7
+        Style = tbsSeparator
+      end
+      object ToolButton9: TToolButton
+        Left = 193
+        Top = 0
+        Hint = #1054' '#1087#1088#1086#1075#1088#1072#1084#1084#1077
+        Caption = 'tbAbout'
+        ImageIndex = 6
+        OnClick = tbAboutClick
+      end
+    end
+  end
+  object pnBottom: TPanel
+    Left = 0
+    Top = 456
+    Width = 969
+    Height = 220
+    Anchors = [akLeft, akRight, akBottom]
+    BevelOuter = bvNone
+    TabOrder = 2
+    object Splitter: TSplitter
+      Left = 409
+      Top = 0
+      Width = 5
+      Height = 220
+      Color = 15132390
+      ParentColor = False
+      ResizeStyle = rsUpdate
+      OnMoved = SplitterMoved
+    end
+    object pnScan: TPanel
+      Left = 0
+      Top = 0
+      Width = 409
+      Height = 220
+      Align = alLeft
+      Alignment = taLeftJustify
+      Color = 15132390
+      TabOrder = 0
+      object MeasuringBox: TGroupBox
+        Left = 8
+        Top = 5
+        Width = 225
+        Height = 201
+        Caption = #1055#1072#1088#1072#1084#1077#1090#1088#1099' '#1089#1082#1072#1085#1080#1088#1086#1074#1072#1085#1080#1103
+        Color = 15132390
+        ParentColor = False
+        TabOrder = 0
+        object Label6: TLabel
+          Left = 26
+          Top = 122
+          Width = 48
+          Height = 13
+          Alignment = taRightJustify
+          Caption = #1057#1082#1086#1088#1086#1089#1090#1100
+          WordWrap = True
+        end
+        object Label5: TLabel
+          Left = 37
+          Top = 51
+          Width = 37
+          Height = 13
+          Alignment = taRightJustify
+          Caption = #1053#1072#1095#1072#1083#1086
+        end
+        object Label8: TLabel
+          Left = 43
+          Top = 76
+          Width = 31
+          Height = 13
+          Alignment = taRightJustify
+          Caption = #1050#1086#1085#1077#1094
+        end
+        object Label3: TLabel
+          Left = 54
+          Top = 101
+          Width = 20
+          Height = 13
+          Alignment = taRightJustify
+          Caption = #1064#1072#1075
+        end
+        object Label17: TLabel
+          Left = 6
+          Top = 26
+          Width = 68
+          Height = 13
+          Alignment = taRightJustify
+          Caption = #1042#1086#1079#1073#1091#1078#1076#1077#1085#1080#1077
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          Font.Pitch = fpFixed
+          Font.Style = []
+          ParentFont = False
+          WordWrap = True
+        end
+        object lbFrom: TLabel
+          Left = 166
+          Top = 51
+          Width = 47
+          Height = 13
+          AutoSize = False
+          Caption = #1086#1073#1088'.'#1089#1072#1085#1090'.'
+        end
+        object lbTo: TLabel
+          Left = 166
+          Top = 76
+          Width = 47
+          Height = 13
+          AutoSize = False
+          Caption = #1086#1073#1088'.'#1089#1072#1085#1090'.'
+        end
+        object lbSPM: TLabel
+          Left = 166
+          Top = 101
+          Width = 50
+          Height = 13
+          AutoSize = False
+          Caption = #1086#1073#1088'.'#1089#1072#1085#1090'. '
+        end
+        object lbspeed: TLabel
+          Left = 164
+          Top = 121
+          Width = 47
+          Height = 13
+          AutoSize = False
+          Caption = #1086#1073#1088'.'#1089#1072#1085#1090'. '
+          Transparent = True
+          WordWrap = True
+        end
+        object Label1: TLabel
+          Left = 164
+          Top = 134
+          Width = 28
+          Height = 13
+          Caption = '/'#1084#1080#1085'.'
+          Transparent = True
+        end
+        object Label15: TLabel
+          Left = 166
+          Top = 26
+          Width = 53
+          Height = 13
+          AutoSize = False
+          Caption = #1086#1073#1088'.'#1089#1072#1085#1090'.     '
+        end
+        object Label18: TLabel
+          Left = 25
+          Top = 172
+          Width = 49
+          Height = 13
+          Alignment = taRightJustify
+          Caption = #1048#1085#1090#1077#1088#1074#1072#1083
+        end
+        object Label19: TLabel
+          Left = 25
+          Top = 147
+          Width = 49
+          Height = 13
+          Alignment = taRightJustify
+          Caption = #1055#1088#1086#1093#1086#1076#1086#1074
+        end
+        object Label20: TLabel
+          Left = 164
+          Top = 172
+          Width = 9
+          Height = 13
+          Caption = #1089'.'
+        end
+        object eInterval: TEdit
+          Left = 80
+          Top = 120
+          Width = 80
+          Height = 21
+          Hint = #1057#1082#1086#1088#1086#1089#1090#1100' '#1089#1082#1072#1085#1080#1088#1086#1074#1072#1085#1080#1103
+          TabOrder = 4
+          Text = '1000'
+        end
+        object eFrom: TEdit
+          Left = 80
+          Top = 45
+          Width = 80
+          Height = 21
+          Hint = #1053#1072#1095#1072#1083#1086' '#1076#1080#1072#1087#1072#1079#1086#1085#1072' '#1089#1082#1072#1085#1080#1088#1086#1074#1072#1085#1080#1103
+          AutoSelect = False
+          MaxLength = 1800
+          TabOrder = 1
+          Text = '500'
+        end
+        object eTowards: TEdit
+          Left = 80
+          Top = 70
+          Width = 80
+          Height = 21
+          Hint = #1050#1086#1085#1077#1094' '#1076#1080#1072#1087#1072#1079#1086#1085#1072' '#1089#1082#1072#1085#1080#1088#1086#1074#1072#1085#1080#1103
+          TabOrder = 2
+          Text = '520'
+        end
+        object StaticText1: TStaticText
+          Left = 8
+          Top = 16
+          Width = 4
+          Height = 4
+          BevelEdges = [beBottom]
+          BevelInner = bvLowered
+          BevelOuter = bvNone
+          TabOrder = 7
+        end
+        object espm: TComboBox
+          Left = 80
+          Top = 95
+          Width = 80
+          Height = 21
+          Hint = #1064#1072#1075' '#1089#1082#1072#1085#1080#1088#1086#1074#1072#1085#1080#1103
+          ItemHeight = 13
+          TabOrder = 3
+          Text = '0'
+        end
+        object eActLine: TComboBox
+          Left = 80
+          Top = 20
+          Width = 80
+          Height = 21
+          Hint = #1051#1080#1085#1080#1103' '#1074#1086#1079#1073#1091#1078#1076#1077#1085#1080#1103
+          ItemHeight = 13
+          TabOrder = 0
+          Text = '19436,35'
+          Items.Strings = (
+            '15802,53'
+            '18796,99'
+            '19436,35'
+            '19932,23'
+            '20140,99'
+            '20491,80'
+            '20986,36'
+            '21155,07'
+            '21468,44'
+            '21838,83'
+            '22002,20')
+        end
+        object eOver: TEdit
+          Left = 80
+          Top = 145
+          Width = 80
+          Height = 21
+          Hint = #1063#1080#1089#1083#1086' '#1087#1088#1086#1093#1086#1076#1086#1074' '#1089#1082#1072#1085#1080#1088#1086#1074#1072#1085#1080#1103
+          TabOrder = 5
+          Text = '1'
+        end
+        object ePause: TEdit
+          Left = 80
+          Top = 170
+          Width = 80
+          Height = 21
+          Hint = #1048#1085#1090#1077#1088#1074#1072#1083' '#1084#1077#1078#1076#1091' '#1087#1088#1086#1093#1086#1076#1072#1084#1080
+          TabOrder = 6
+          Text = '60'
+        end
+      end
+      object HBox: TGroupBox
+        Left = 240
+        Top = 69
+        Width = 153
+        Height = 92
+        Caption = #1060#1069#1059
+        Color = 15132390
+        ParentColor = False
+        TabOrder = 1
+        object shapeHV: TShape
+          Left = 124
+          Top = 10
+          Width = 17
+          Height = 25
+          Brush.Color = clGray
+          Shape = stCircle
+        end
+        object Label2: TLabel
+          Left = 11
+          Top = 66
+          Width = 31
+          Height = 13
+          Caption = #1055#1086#1088#1086#1075
+        end
+        object lbHv: TLabel
+          Left = 128
+          Top = 64
+          Width = 12
+          Height = 13
+          Caption = #1043#1094
+        end
+        object cbHigh: TCheckBox
+          Left = 8
+          Top = 12
+          Width = 105
+          Height = 25
+          Hint = #1042#1082#1083#1102#1095#1080#1090#1100' '#1092#1086#1090#1086#1101#1083#1077#1082#1090#1088#1086#1085#1085#1099#1081' '#1091#1084#1085#1086#1078#1080#1090#1077#1083#1100
+          Caption = #1060#1069#1059' '#1074#1082#1083#1102#1095#1077#1085
+          TabOrder = 0
+          OnClick = cbHighClick
+        end
+        object cbAttention: TCheckBox
+          Left = 8
+          Top = 33
+          Width = 142
+          Height = 25
+          Hint = #1042#1082#1083#1102#1095#1080#1090#1100' '#1079#1072#1097#1080#1090#1091' '#1086#1090' '#1079#1072#1089#1074#1077#1090#1082#1080' '#1060#1069#1059
+          Caption = #1040#1074#1072#1088#1080#1081#1085#1086#1077' '#1086#1090#1082#1083#1102#1095#1077#1085#1080#1077
+          TabOrder = 1
+        end
+        object ehv: TEdit
+          Left = 45
+          Top = 63
+          Width = 76
+          Height = 21
+          Hint = #1055#1086#1088#1086#1075' '#1089#1088#1072#1073#1072#1090#1099#1074#1072#1085#1080#1103' '#1079#1072#1096#1080#1090#1099
+          TabOrder = 2
+          Text = '100000'
+        end
+      end
+      object DirectionBox: TGroupBox
+        Left = 239
+        Top = 6
+        Width = 153
+        Height = 60
+        Caption = #1054#1073#1083#1072#1089#1090#1100
+        Color = 15132390
+        ParentColor = False
+        TabOrder = 2
+        object lbCorrds: TLabel
+          Left = -680
+          Top = -168
+          Width = 38
+          Height = 13
+          Caption = 'lbCorrds'
+        end
+        object rbRight: TRadioButton
+          Left = 8
+          Top = 16
+          Width = 113
+          Height = 17
+          Hint = #1057#1082#1072#1085#1080#1088#1086#1074#1072#1090#1100' '#1072#1085#1090#1080#1089#1090#1086#1082#1089#1086#1074#1091#1102' '#1086#1073#1083#1072#1089#1090#1100' '#1089#1087#1077#1082#1090#1088#1072
+          Caption = #1040#1085#1090#1080#1089#1090#1086#1082#1089#1086#1074#1072#1103
+          TabOrder = 0
+        end
+        object rbLeft: TRadioButton
+          Left = 8
+          Top = 32
+          Width = 113
+          Height = 25
+          Hint = #1057#1082#1072#1085#1080#1088#1086#1074#1072#1090#1100' '#1089#1090#1086#1082#1089#1086#1074#1091#1102' '#1086#1073#1083#1072#1089#1090#1100' '#1089#1087#1077#1082#1090#1088#1072
+          Caption = #1057#1090#1086#1082#1089#1086#1074#1072#1103
+          Checked = True
+          TabOrder = 1
+          TabStop = True
+        end
+      end
+      object xbStartMeasuring: TXiButton
+        Left = 240
+        Top = 168
+        Width = 153
+        Height = 33
+        ColorFace = 15987699
+        ColorGrad = 12369084
+        ColorDark = 10987431
+        ColorLight = 16250871
+        ColorBorder = 6447714
+        ColorText = clBlack
+        OverColorFace = 15790320
+        OverColorGrad = 10921638
+        OverColorDark = 10658466
+        OverColorLight = 15658734
+        OverColorBorder = 7697781
+        OverColorText = clBlack
+        DownColorFace = 13290186
+        DownColorGrad = 14342874
+        DownColorDark = 15329769
+        DownColorLight = 8158332
+        DownColorBorder = 5131854
+        DownColorText = clBlack
+        DisabledColorFace = 15658734
+        DisabledColorGrad = clWhite
+        DisabledColorDark = 13816530
+        DisabledColorLight = clWhite
+        DisabledColorBorder = clGray
+        DisabledColorText = clGray
+        ColorFocusRect = 11382189
+        ColorScheme = csNeoSilver
+        Ctl3D = True
+        Layout = blGlyphLeft
+        Spacing = 4
+        TransparentGlyph = True
+        Gradient = True
+        HotTrack = True
+        Caption = #1057#1090#1072#1088#1090
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'MS Sans Serif'
+        Font.Style = [fsBold]
+        ParentFont = False
+        TabOrder = 3
+        OnClick = xbStartMeasuringClick
+      end
+    end
+    object pnGraph: TPanel
+      Left = 414
+      Top = 0
+      Width = 555
+      Height = 220
+      Align = alClient
+      Color = 15132390
+      TabOrder = 1
+      DesignSize = (
+        555
+        220)
+      object lwSpectrumList: TListView
+        Left = 154
+        Top = 6
+        Width = 386
+        Height = 200
+        Anchors = [akLeft, akTop, akRight]
+        Checkboxes = True
+        Columns = <
+          item
+            Caption = #1057#1087#1077#1082#1090#1088
+            Width = 60
+          end
+          item
+            AutoSize = True
+            Caption = #1050#1086#1084#1084#1077#1085#1090#1072#1088#1080#1081
+            MinWidth = 120
+          end
+          item
+            AutoSize = True
+            Caption = #1055#1072#1088#1072#1084#1077#1090#1088#1099
+            MaxWidth = 80
+            MinWidth = 80
+          end
+          item
+            AutoSize = True
+            Caption = #1044#1072#1090#1072'/'#1042#1088#1077#1084#1103
+            MaxWidth = 120
+            MinWidth = 120
+          end>
+        DragMode = dmAutomatic
+        FlatScrollBars = True
+        GridLines = True
+        ReadOnly = True
+        RowSelect = True
+        ParentColor = True
+        PopupMenu = lwmenu
+        TabOrder = 0
+        ViewStyle = vsReport
+        OnCustomDrawItem = lwSpectrumListCustomDrawItem
+        OnCustomDrawSubItem = lwSpectrumListCustomDrawSubItem
+        OnKeyDown = lwSpectrumListKeyDown
+        OnMouseDown = lwSpectrumListMouseUp
+      end
+      object boxX: TGroupBox
+        Left = 8
+        Top = 5
+        Width = 140
+        Height = 75
+        Caption = #1054#1089#1100' X'
+        TabOrder = 1
+        object Label12: TLabel
+          Left = 12
+          Top = 21
+          Width = 24
+          Height = 13
+          Caption = #1052#1080#1085'.'
+        end
+        object Label13: TLabel
+          Left = 8
+          Top = 45
+          Width = 30
+          Height = 13
+          Caption = #1052#1072#1082#1089'.'
+        end
+        object exmin: TEdit
+          Left = 42
+          Top = 18
+          Width = 65
+          Height = 21
+          Hint = #1052#1080#1085#1080#1084#1091#1084' '#1086#1089#1080' X'
+          TabOrder = 0
+          Text = '0'
+          OnKeyDown = exminKeyDown
+        end
+        object exmax: TEdit
+          Left = 42
+          Top = 41
+          Width = 65
+          Height = 21
+          Hint = #1052#1072#1082#1089#1080#1084#1091#1084' '#1086#1089#1080' '#1061
+          TabOrder = 1
+          Text = '200'
+          OnKeyDown = exmaxKeyDown
+        end
+      end
+      object boxY: TGroupBox
+        Left = 8
+        Top = 85
+        Width = 140
+        Height = 75
+        Caption = #1054#1089#1100' Y'
+        TabOrder = 2
+        object Label10: TLabel
+          Left = 11
+          Top = 19
+          Width = 24
+          Height = 13
+          Caption = #1052#1080#1085'.'
+        end
+        object Label11: TLabel
+          Left = 9
+          Top = 43
+          Width = 30
+          Height = 13
+          Caption = #1052#1072#1082#1089'.'
+        end
+        object Label7: TLabel
+          Left = 112
+          Top = 21
+          Width = 12
+          Height = 13
+          Caption = #1043#1094
+        end
+        object Label9: TLabel
+          Left = 112
+          Top = 44
+          Width = 12
+          Height = 13
+          Caption = #1043#1094
+        end
+        object eymin: TEdit
+          Left = 42
+          Top = 16
+          Width = 65
+          Height = 21
+          Hint = #1052#1080#1085#1080#1084#1091#1084' '#1086#1089#1080' Y'
+          TabOrder = 0
+          Text = '0'
+          OnKeyDown = eyminKeyDown
+        end
+        object eymax: TEdit
+          Left = 42
+          Top = 39
+          Width = 65
+          Height = 21
+          Hint = #1052#1072#1082#1089#1080#1084#1091#1084' '#1086#1089#1080' Y'
+          TabOrder = 1
+          Text = '10000'
+          OnKeyDown = eymaxKeyDown
+        end
+      end
+      object xbApplyGraph: TXiButton
+        Left = 8
+        Top = 164
+        Width = 140
+        Height = 21
+        ColorFace = 15987699
+        ColorGrad = 12369084
+        ColorDark = 10987431
+        ColorLight = 16250871
+        ColorBorder = 6447714
+        ColorText = clBlack
+        OverColorFace = 15790320
+        OverColorGrad = 10921638
+        OverColorDark = 10658466
+        OverColorLight = 15658734
+        OverColorBorder = 7697781
+        OverColorText = clBlack
+        DownColorFace = 13290186
+        DownColorGrad = 14342874
+        DownColorDark = 15329769
+        DownColorLight = 8158332
+        DownColorBorder = 5131854
+        DownColorText = clBlack
+        DisabledColorFace = 15658734
+        DisabledColorGrad = clWhite
+        DisabledColorDark = 13816530
+        DisabledColorLight = clWhite
+        DisabledColorBorder = clGray
+        DisabledColorText = clGray
+        ColorFocusRect = 11382189
+        ColorScheme = csNeoSilver
+        Ctl3D = True
+        Layout = blGlyphLeft
+        Spacing = 4
+        TransparentGlyph = True
+        Gradient = True
+        HotTrack = True
+        Caption = #1055#1088#1080#1084#1077#1085#1080#1090#1100
+        TabOrder = 3
+        OnClick = xbApplyGraphClick
+      end
+      object xbOptimizeGraph: TXiButton
+        Left = 8
+        Top = 188
+        Width = 140
+        Height = 21
+        Hint = #1042#1099#1087#1086#1083#1085#1080#1090#1100' '#1072#1074#1090#1086#1084#1072#1090#1080#1095#1077#1089#1082#1086#1077' '#1084#1072#1089#1096#1090#1072#1073#1080#1088#1086#1074#1072#1085#1080#1077' '#1089#1087#1077#1082#1090#1088#1086#1074'.'
+        ColorFace = 15987699
+        ColorGrad = 12369084
+        ColorDark = 10987431
+        ColorLight = 16250871
+        ColorBorder = 6447714
+        ColorText = clBlack
+        OverColorFace = 15790320
+        OverColorGrad = 10921638
+        OverColorDark = 10658466
+        OverColorLight = 15658734
+        OverColorBorder = 7697781
+        OverColorText = clBlack
+        DownColorFace = 13290186
+        DownColorGrad = 14342874
+        DownColorDark = 15329769
+        DownColorLight = 8158332
+        DownColorBorder = 5131854
+        DownColorText = clBlack
+        DisabledColorFace = 15658734
+        DisabledColorGrad = clWhite
+        DisabledColorDark = 13816530
+        DisabledColorLight = clWhite
+        DisabledColorBorder = clGray
+        DisabledColorText = clGray
+        ColorFocusRect = 11382189
+        ColorScheme = csNeoSilver
+        Ctl3D = True
+        Layout = blGlyphLeft
+        Spacing = 4
+        TransparentGlyph = True
+        Gradient = True
+        HotTrack = True
+        Caption = #1054#1087#1090#1080#1084#1080#1079#1080#1088#1086#1074#1072#1090#1100
+        TabOrder = 4
+        OnClick = xbOptimizeGraphClick
+      end
+    end
+  end
+  object pnEngine: TPanel
+    Left = 0
+    Top = 415
+    Width = 969
+    Height = 40
+    Anchors = [akLeft, akRight, akBottom]
+    BevelInner = bvSpace
+    BevelOuter = bvSpace
+    Caption = 'pnEngine'
+    TabOrder = 3
+    object pbEngine: TPaintBox
+      Left = 2
+      Top = 2
+      Width = 965
+      Height = 36
+      Align = alClient
+      OnPaint = pbEnginePaint
+      ExplicitTop = -1
+    end
+  end
+  object SaveDialog: TSaveDialog
+    DefaultExt = 'mdb'
+    Filter = #1058#1077#1082#1089#1090#1086#1074#1099#1081' '#1092#1072#1081#1083' (*.txt)|*.txt'
+    FilterIndex = 0
+    Options = [ofOverwritePrompt, ofHideReadOnly, ofExtensionDifferent, ofCreatePrompt]
+    Title = #1057#1086#1093#1088#1072#1085#1077#1085#1080#1077' '#1074' '#1090#1077#1082#1089#1090#1086#1074#1099#1081' '#1092#1072#1081#1083
+    Left = 228
+    Top = 59
+  end
+  object ilTool: TImageList
+    Left = 592
+    Top = 66
+    Bitmap = {
+      494C010108000900040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      0000000000003600000028000000400000003000000001001000000000000018
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000D562263581248124812481248124
+      8124812481248124E430D5620000000000000000000000000000000000003967
+      E71CE71CAD3500000000000000000000000000000000000000005D639A46F731
+      961D961DF7319A465D6300000000000000000000000000000000000000000000
+      BD777B6F9C73FF7F0000000000000000000026398649C855C855C855C855C855
+      C855C855C855055586492639000000000000000000000000734E7B6F00003967
+      6C2D554AAD3500000000734EDE7B0000000000000000BE739A46961DD80DF909
+      1A061A06F909D80D961D9A46BE73000000000000000000000000000000000000
+      9C730C32F75E9C73FF7F0000000000000000C12CE8558C318C318C318C318C31
+      8C314B620555887E05554B620000000000000000000031461142292531468D31
+      754EFA5ECF398C31EF3D8F318C31DE7B00000000BE73593ED8113B063B063B0A
+      3B0A3B063B0A3B063A0AD811593EBE7300000000000000000000000000000000
+      7B6F0212EA29F75E9C73FF7F000000000000C230E959AD35FF7FFF7FFF7FFF7F
+      FF7F0555887E547F887E055500000000000000009C734A29B5567C6F95527C6F
+      3C671B63FA5E774E34469952AF35B556000000009A46D8113B0E3B0E3B0EFF7F
+      FF7FFF7FFF7F3B0E3B0E3B0ED8119A460000DE7B9C737B6F7B6F7B6F7B6F7B6F
+      1863631AC422E929F75E9C73FF7F00000000E2340A5AAD35FF7F5A6B5A6B5A6B
+      0555897E547F0555547F897E055500000000000000007B6FAD35BE77BD77D65A
+      10428C31F03D754EDA5A34461042000000005D63961D3B125B125B125B125C12
+      DF73FF7F5C125B125C125C125B12961D5D639C73D65A734E734E734E734E734E
+      524AA41E67330527E929F75E9C73FF7F000003392B5ECE39FF7F7B6F7B6F7A6F
+      7B6F055505554B620555547FCB7E0555000000000000F75E3146DE7BF75EAF35
+      344699523446AF35754E764EEF3D000000009A46F9197C167C167C167C167C16
+      DF73FF7F7C167C167C167C167C16F9199A467B6FE20D631A631A631A631A631A
+      841EE526873787370423E929F75E9C73FF7F233D4B62EF3DFF7F7B6F7B6F7B6F
+      7B6F7B6FFF7F05554B620555547F0F7F055518631042AD353967BE773146544A
+      1B633C671B63544AF03DFA5EF13D10421042F7315B1A9C1E7C1E7C1E7C1E7C1E
+      DF73FF7F9C1E7C1E7C1E9C1E9C1E5B1AF7317B6F4316262B662F662F662F662F
+      662F6733A733A737662FC41EC929F75E9C73233D4C661042FF7F9C739C739C73
+      9C739C730555887E05554B62055505550000B556544A3A679D73BD778C31FA5E
+      7D6FBE777D6FFA5E8C311B63FA5E764E6B2D961D9C229D229D229D269D229D22
+      DF73FF7F9D229D229D229D229D229C22961D7B6F4316262B662F662F662F662F
+      662F662B662F462B462B2527841ACA2D5A6B44416D6A3146FF7FBD77BD77BD77
+      BD770555887E547F887E0555000000000000D65AF03D96527C6F9D7310429652
+      BE77FF7FBE77965210423C6B9652F03D8C31961D9D2ABD2ABD2ABD2ABD2AFF7F
+      FF7FFF7FBD2ABD2ABD2ABD2ABD2ABD2A961D7B6F0212704B904B904B904B904B
+      904B704B2F43ED3ECD3ECD3ECD3A47262E3A65458E6A3146FF7FDE7BDE7BDE7B
+      0555897E547F0555547F897E055500000000BD777B6F945295527C6FD65ACF3D
+      B7569D73B656CF3DD65A5B6BCE397B6F7B6FF7319C2EDE32DE32DE32DE32DE32
+      DE32DE32DE32DE32DE32DE32DE329C2EF7317B6FE211745794579457945B945B
+      945B74574D3AEB2DA929892565196925DE7B6545AF6E524AFF7FDE7BDE7BDE7B
+      DE7B055505554B620555547FCB7E0555000000000000BD77EF3D3C677C6FD65A
+      10428C313146F75EBD77B656B556000000009A469B3A1E3FFE36DE36FE36FE36
+      7F5B7F5BFE36DE36FE36DE361E3F7B369A469C73A20D775F775F986398679867
+      986778635042FF7FFF7FFF7FFF7F734EDE7B8649AF72724E5A6B5A6B5A6B5A6B
+      5A6B5A6B5A6B724EAF720555547F0F7F055500000000B556754E1B633C6B7C6F
+      9D73BD77BE77DE7BBE779C73EF3D9C7300005D63961D5E571F47FE3EFE3EFE3E
+      FF7FFF7FFE3EFE3EFE3E1F475E57961D5D63DE7B4109A415610961098209A20D
+      A20DC20D5146EF3DFF7FFF7FFF7F734EDE7BA74DD0728C318C318C318C318C31
+      8C318C318C318C31D0724B620555055500000000DE7B524A544A754E10429656
+      7C6F9D733967734E524A1863734E5A6B000000009A469B3A7F5F3F4B1F431F43
+      7F5F7F5F1F431F433F4B7F5F9B3A9A460000FF7FDE7B5A6BB556F75EF75EF75E
+      945201051042924AFF7FFF7FFF7F9452DE7BC8518D6A8C319C739C739C739C73
+      9C739C739C738C318D6AC85100000000000000000000DE7B524AB556BD77B556
+      D75A3B6731465A6B9C7310423967000000000000BE73593E9B3A7F637F5F3F4F
+      1F471F473F4F7F5F7F639B3A593EBE7300000000DE7BBD77D65A9452734E3146
+      EF3DA925F65AFF7FD65A734EFF7FB556FF7F386F2C5AC8518C31EF3D94529C73
+      9452EF3D8C31C8510A56386F000000000000000000000000DE7B000000007B6F
+      534AB656945200000000DE7B00000000000000000000BE739A46961DDC4A7E63
+      DF73DF737E63DC4A961D9A46BE730000000000000000BD777B6F18639452F75E
+      9C73BC73F65A9452B556D65AF75EF75EFF7F0000000000000000D65A10428C31
+      1042D65A0000000000000000000000000000000000000000000000000000BD77
+      186318635A6B00000000000000000000000000000000000000005D639A46F731
+      961D961DF7319A465D630000000000000000000000000000DE7B9C733967F75E
+      F75EAB2DF75E39679C73DE7B000000000000FF7FFF7FDE7BDE7BDE7BDE7BDE7B
+      DE7BDE7BDE7BDE7BDE7BDE7BDE7BFF7FFF7F0000000029252925292529252925
+      2925292529252925292529252925EF3D18630000000000000000000000000000
+      000000000000000000006B3DC6306B41000000000000000000000000DF77383A
+      5511F304F30475191B5B1B5B7519DF770000DE7B9C7339671863186318631863
+      18631863186318631863186339679C73DE7B00004A29F03D1863945218637B6F
+      BD777B6F1863B55A9452186318639452EF3D0000000000000000000000000000
+      00000000000000006B41C6304A45EF556B4100000000000000001C5BF72D5A2E
+      DC36DD2E9D223A1E7611971597151B5B0000BD77734ECE39AD35AD35AD35AD35
+      AD35AD35AD35AD35AD35AD35CE39734EBD774A291042186318639452B55A1863
+      7B6FBD777B6F186394521863186318634A290000000000000000000000000000
+      0000000000006B41C6304A45EF551877C630000000000000DB5276093D533D53
+      3E4F7F5B7F5BDE36DE36FF3E3A2A18320000BD77EF413F4F3F4F3F4F5F4F3F4F
+      3F4F1E4B1E47FE42DE3EBE3ABE3AEF3DBD776B2D39673967396794529452B65A
+      18637B6FBD777B6F94523967396739676B2D0000000000000000000000000000
+      000000006B41C6304A45EF551877EF55EF4D00000000DB52560514057519B621
+      1409B7151D4B3E4BFE3A1F43FE4214090000BD77EF3D9F5F9F5F9F63BF63BF63
+      9F5F3C57FA4ED94AB946DA42FC46EF3DBD776B2D396739673967396794529452
+      945294529452945239673967396739676B2D0000000000000000000000000000
+      00006B3DC6304A45EF551877EF556B41000000000000140918329E7300000000
+      0000BA4A1409BD32FE3E1F431F4797191B5BBD77EF3D5F577F5B9F5F9F5F9F5F
+      7E573436D12D6E214E1D6F21D325EF3DBD778C315A6B5A6B5A6B5A6B5A6B5A6B
+      5A6B5A6B5A6B5A6B5A6B5A6B5A6B5A6B8C310000000000000000000000000000
+      0000C6304A45EF551877EF556B41000000000000000000000000000000000000
+      00001B5B79423D57DF77DF779F675B2E18329C73EE3D5D579E5FBF63BF67BF67
+      9E5F543EFF7FFF7FFF7FFF7FD329EF3DBD77AD357B6F7B6F9452945294529452
+      9452945294529452945294525B6F5B6FAD350000FF7FF956142E50155015142E
+      2C1DC630EF551877EF556B410000000000000000000000000000000000000000
+      0000383AF304F304F304F304F304F30475199C73EF3DFA4E1B4F7D5B9D639D5F
+      5C573336D02DFF7FFF7FFF7FB321EF3DBD77CE397B6F9452BD77BD77BD77BD77
+      BD77BD77BD77BD77BD77BD7794527B6FCE39FF7F9742D4217A36FE46FE467A36
+      D42197466B416B41EF4D00000000000000000000000000000000000000000000
+      0000000000000000000000000000000000009C73EF3D1957D756D756F756D756
+      744A103AD756FF7FFF7FFF7F343EEF3DBD77CE399C739452BD77BD77BD77BD77
+      BD77BD77BD77BD77BD77BD7794529C73CE39F956D4211E473F4F5F579F67BF6B
+      3E4FD4212C1D0000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000009C73EF3D9452B556514AAD358C31
+      1042F75EFF7F39671042FF7FEF3D1042BD77EF3DBD779452DE77DE77BE7BBE77
+      DE77DE77DE77BE77DE77DE779452BD77EF3D142E7A361E4B1E473F4B5F53BF6F
+      BF6B7A36142E000000000000000000000000F304F304F304F304F304F304F304
+      BA4A00000000000000000000000000000000DE7B10425A6BF76217637B6FDE7B
+      DE7B7B6F1863B556B456B556D65A3146DE7BEF3DBD779452DE7BDE7BDE7BDE7B
+      DE7BDE7BDE7BDE7BDE7BDE7B9452BD77EF3D5015FE463D53DC461E471F4B5F57
+      BF6BFE465015000000000000000000000000D729FD4E5F571F43FE3AD8199946
+      9E7300000000000000000000DF7700000000FF7FD65A94525A6BF75EB556D65A
+      F75E524ACE39104231463146524A1863FF7F1042DE7B9452DE7BDE7BDE7BDE7B
+      DE7BDE7BDE7BDE7BDE7BDE7B9452DE7B10425015FE46BE6F7E637E63FD461F4B
+      7F5BFE465015000000000000000000000000DB523A32BF6FFF3EDE369C2AB815
+      7942DF77000000001B5BB621B621000000000000FF7F1863DE7BFF7FFF7FFF7F
+      B556D65AFF7F0000000000000000000000001042CE399452FF7FFF7FFF7FFF7F
+      FF7FFF7FFF7FFF7FFF7FFF7F9452CE391042142E7A369F6BDF77DF77FD4AFD46
+      1E4B7A36142E000000000000000000000000DF771409BF6B3F4B1E47DE327C22
+      B70DF4047519F304550514097D6B000000000000FF7F5A6BB556734E94529452
+      B556BD770000000000000000000000000000524AFF7F9452FF7FFF7FFF7FFF7F
+      FF7FFF7FFF7FFF7FFF7FFF7F9452FF7F524AF956D4213E4F9F6BDF739E6B3E57
+      1E47D421F9560000000000000000000000000000D729DC42FE3E3E4F9F67FD3E
+      BD269C1EFA09970514097D6B0000000000000000000000000000000000000000
+      000000000000000000000000000000000000D65A9C739452FF7FFF7FFF7FFF7F
+      FF7FFF7FFF7FFF7FFF7FFF7F94529C73D65AFF7F9742D4217A36FE46FE467A36
+      D4219742FF7F0000000000000000000000000000BA4AD8191409560D9B323E53
+      7E5B3D4F760575199E7300000000000000000000000000000000000000000000
+      0000000000000000000000000000000000007B6FB556734E734E734E734E734E
+      734E734E734E734E734E734E734ED65A7B6F0000FF7FF956142E50155015142E
+      F956FF7F000000000000000000000000000000009E73B6219E733C63D7295511
+      1409D729DB52000000000000000000000000424D3E000000000000003E000000
+      2800000040000000300000000100010000000000800100000000000000000000
+      000000000000000000000000FFFFFF0000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000007FC3FF00FFE1F0007E433C003FE0F
+      0007C0018001FE0700078001800100030003C003000000010001C00300000000
+      0000000000000000000100000000000000070000000000000003000000000000
+      0001C003000000000000C0010000000000018001800100000007C00380018000
+      0007EC37C003C000F07FFC3FF00FE0070000C000FFF1F80100008000FFE0F001
+      00000000FFC0E00100000000FF80C00100000000FF01C70000000000FF03FF00
+      000000008007FF0000000000000FFFFF00000000003FFFFF00000000003F00FF
+      00000000003F00FB00000000003F0063803F0000003F0003807F0000003F8007
+      FFFF0000003F800FFFFF0000807F803F00000000000000000000000000000000
+      000000000000}
+  end
+  object mboxmenu: TPopupMenu
+    Left = 558
+    Top = 66
+    object mbreset: TMenuItem
+      Caption = #1057#1073#1088#1086#1089#1080#1090#1100' '#1091#1074#1077#1083#1080#1095#1077#1085#1080#1077
+      SubMenuImages = ilTool
+      ImageIndex = 0
+      OnClick = mbResetClick
+    end
+    object mbDel: TMenuItem
+      Caption = #1059#1076#1072#1083#1080#1090#1100' '#1090#1086#1095#1082#1080' '#1074#1099#1095#1080#1090#1072#1085#1080#1103
+      OnClick = mbDelClick
+    end
+  end
+  object lwmenu: TPopupMenu
+    Left = 528
+    Top = 66
+    object lvSave: TMenuItem
+      Caption = #1057#1086#1093#1088#1072#1085#1080#1090#1100
+      OnClick = lvSaveClick
+    end
+    object lvProc: TMenuItem
+      Caption = #1057#1075#1083#1072#1078#1080#1074#1072#1085#1080#1077
+      OnClick = lvProcClick
+    end
+    object lvEdit: TMenuItem
+      Caption = #1056#1077#1076#1072#1082#1090#1080#1088#1086#1074#1072#1090#1100
+      OnClick = lvEditClick
+    end
+    object lwSubstuct: TMenuItem
+      Caption = #1042#1099#1095#1077#1089#1090#1100
+      OnClick = lwSubstuctClick
+    end
+    object lvFindPeaks: TMenuItem
+      Caption = #1052#1072#1082#1089#1080#1084#1091#1084#1099
+      object N1: TMenuItem
+        Caption = #1053#1072#1081#1090#1080
+        OnClick = N1Click
+      end
+      object N2: TMenuItem
+        Caption = #1059#1076#1072#1083#1080#1090#1100
+        OnClick = N2Click
+      end
+    end
+    object lvDelete: TMenuItem
+      Caption = #1059#1076#1072#1083#1080#1090#1100
+      OnClick = lvDeleteClick
+    end
+    object lvDeleteAll: TMenuItem
+      Caption = #1059#1076#1072#1083#1080#1090#1100' '#1074#1089#1077
+      OnClick = lvDeleteAllClick
+    end
+  end
+  object ae1: TApplicationEvents
+    OnException = ae1Exception
+    Left = 664
+    Top = 66
+  end
+  object dlgOpenFile: TOpenDialog
+    Filter = #1053#1072#1073#1086#1088' '#1089#1087#1077#1082#1090#1088#1086#1074' (*.dfs)|*.dfs'
+    Left = 256
+    Top = 58
+  end
+  object dlgSaveFile: TSaveDialog
+    DefaultExt = 'dfs'
+    Filter = #1053#1072#1073#1086#1088' '#1089#1087#1077#1082#1090#1088#1086#1074' (*.dfs)|*.dfs'
+    FilterIndex = 0
+    Options = [ofOverwritePrompt, ofHideReadOnly, ofEnableSizing]
+    Title = #1057#1086#1093#1088#1072#1085#1077#1085#1080#1077' '#1085#1072#1073#1086#1088#1072' '#1089#1087#1077#1082#1090#1088#1086#1074
+    Left = 200
+    Top = 58
+  end
+end

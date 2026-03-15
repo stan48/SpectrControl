@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+  <PersonalityInfo>
+    <Option>
+      <Option Name="Personality">Default.Personality</Option>
+      <Option Name="ProjectType"></Option>
+      <Option Name="Version">1.0</Option>
+      <Option Name="GUID">{0F2A0CC0-9C8A-4D9D-BE73-2D373AF09E67}</Option>
+    </Option>
+  </PersonalityInfo>
+  <Default.Personality>
+    
+    <Projects>
+      <Projects Name="SpectrControl.exe">SpectrControl\SpectrControl.bdsproj</Projects>
+      <Projects Name="DfsControls.bpl">DfsControls\DfsControls.bdsproj</Projects>
+      <Projects Name="Targets">SpectrControl.exe DfsControls.bpl</Projects>
+    </Projects>
+    <Dependencies/>
+  </Default.Personality>
+</BorlandProject>

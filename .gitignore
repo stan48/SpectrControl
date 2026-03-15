@@ -1,0 +1,8 @@
+**/*.dcu
+**/*.bpl
+**/*.~bpl
+**/*.exe
+**/*.local
+**/*.cfg
+**/*.log
+**/__history

@@ -1,0 +1,85 @@
+object fmProc: TfmProc
+  Left = 370
+  Top = 283
+  AlphaBlend = True
+  AlphaBlendValue = 240
+  BorderStyle = bsToolWindow
+  Caption = #1057#1075#1083#1072#1078#1080#1074#1072#1085#1080#1077
+  ClientHeight = 105
+  ClientWidth = 159
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poOwnerFormCenter
+  PixelsPerInch = 96
+  TextHeight = 13
+  object GroupBox1: TGroupBox
+    Left = 8
+    Top = 8
+    Width = 145
+    Height = 89
+    Caption = #1052#1077#1090#1086#1076' '#1060#1091#1088#1100#1077
+    TabOrder = 0
+    object Label2: TLabel
+      Left = 4
+      Top = 20
+      Width = 73
+      Height = 13
+      Caption = #1050#1086#1101#1092#1092#1080#1094#1080#1077#1085#1090':'
+    end
+    object eFu: TEdit
+      Left = 80
+      Top = 18
+      Width = 57
+      Height = 21
+      TabOrder = 0
+      Text = '100'
+      OnKeyDown = eFuKeyDown
+    end
+    object xbSliceApply: TXiButton
+      Left = 24
+      Top = 50
+      Width = 89
+      Height = 25
+      ColorFace = 15987699
+      ColorGrad = 12369084
+      ColorDark = 10987431
+      ColorLight = 16250871
+      ColorBorder = 6447714
+      ColorText = clBlack
+      OverColorFace = 15790320
+      OverColorGrad = 10921638
+      OverColorDark = 10658466
+      OverColorLight = 15658734
+      OverColorBorder = 7697781
+      OverColorText = clBlack
+      DownColorFace = 13290186
+      DownColorGrad = 14342874
+      DownColorDark = 15329769
+      DownColorLight = 8158332
+      DownColorBorder = 5131854
+      DownColorText = clBlack
+      DisabledColorFace = 15658734
+      DisabledColorGrad = clWhite
+      DisabledColorDark = 13816530
+      DisabledColorLight = clWhite
+      DisabledColorBorder = clGray
+      DisabledColorText = clGray
+      ColorFocusRect = 11382189
+      ColorScheme = csNeoSilver
+      Ctl3D = True
+      Layout = blGlyphLeft
+      Spacing = 4
+      TransparentGlyph = True
+      Gradient = True
+      HotTrack = True
+      Caption = #1055#1088#1080#1084#1077#1085#1080#1090#1100
+      TabOrder = 1
+      OnClick = xbSliceApplyClick
+    end
+  end
+end

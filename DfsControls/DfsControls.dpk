@@ -1,0 +1,42 @@
+package DfsControls;
+
+{$R *.res}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DESCRIPTION 'DFS App Extra Controls'}
+{$IMPLICITBUILD OFF}
+
+requires
+  vcl,
+  rtl;
+
+contains
+  XiControls in 'XiControls\XiControls.pas',
+  XiTrackBar in 'XiControls\XiTrackBar.pas',
+  XiButton in 'XiControls\XiButton.pas',
+  XiPanel in 'XiControls\XiPanel.pas',
+  XiProgressBar in 'XiControls\XiProgressBar.pas',
+  MessDlgs in 'XiControls\MessDlgs.pas',
+  GRADPANL in 'GradPanel\GRADPANL.PAS',
+  DrawComboBox in 'DrawComboBox\DrawComboBox.pas';
+
+end.
