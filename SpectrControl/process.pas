@@ -1,4 +1,4 @@
-unit process;
+п»їunit process;
 
 interface
 
@@ -17,7 +17,7 @@ implementation
 
 procedure Subst(spectr: TSpectrum; subs: TSubstruction);
 
-{$REGION ' Внутренния функции '}
+{$REGION ' Р’РЅСѓС‚СЂРµРЅРЅРёРµ С„СѓРЅРєС†РёРё '}
   function IsInside(fPoint: TPointR; part: TPart): Boolean;
   begin
     Result := False;
@@ -53,14 +53,14 @@ var
   parts: array of TPart;
 begin
 
- {страхуемся на случай ошибки}
+ {СЃС‚СЂР°С…СѓРµРјСЃСЏ РЅР° СЃР»СѓС‡Р°Р№ РѕС€РёР±РєРё}
   if subs.Count <= 1 then
   begin
-    ShowError('Для одной точки вычитание не возможно!');
+    ShowError('Р”Р»СЏ РѕРґРЅРѕР№ С‚РѕС‡РєРё РІС‹С‡РёС‚Р°РЅРёРµ РЅРµРІРѕР·РјРѕР¶РЅРѕ!');
     Exit;
   end;
 
-  {преобразуем точки вычитания в отрезки}
+  {РїСЂРµРѕР±СЂР°Р·СѓРµРј С‚РѕС‡РєРё РІС‹С‡РёС‚Р°РЅРёСЏ РІ РѕС‚СЂРµР·РєРё}
   SetLength(parts, subs.Count - 1);
   for i := 1 to subs.Count - 1 do
   begin
@@ -68,7 +68,7 @@ begin
     parts[i - 1].e := subs[i].Point;
   end;
 
-  {проверим попадания в узлы}
+  {РїСЂРѕРІРµСЂРёРј РїРѕРїР°РґР°РЅРёСЏ РІ СѓР·Р»С‹}
   for i := 0 to spectr.Count - 1 do
   begin
     spectrItem := spectr.GetItem(i);
@@ -85,7 +85,7 @@ begin
     end;
   end;
 
-  {проверим попадания в отрезки}
+  {РїСЂРѕРІРµСЂРёРј РїРѕРїР°РґР°РЅРёСЏ РІ РѕС‚СЂРµР·РєРё}
   for i := 0 to spectr.Count - 1 do
   begin
     spectrItem := spectr.GetItem(i);
@@ -98,7 +98,7 @@ begin
         spectr.SetItem(i, spectrItem);
       end;
   end;
-{конец процедуры}
+{РєРѕРЅРµС† РїСЂРѕС†РµРґСѓСЂС‹}
 end;
 
 end.

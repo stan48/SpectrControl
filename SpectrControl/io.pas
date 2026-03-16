@@ -1,4 +1,4 @@
-unit io;
+﻿unit io;
 
 interface
 
@@ -14,62 +14,111 @@ procedure PortWriteWord(Addr: Word; Value: Word);
 
 procedure PortWriteWordLS(Addr: Word; Value: Word);
 
+function InitIO: Boolean;
+procedure FreeIO;
+function IsIOReady: Boolean;
+
 implementation
 
-function PortReadByte(Addr: Word): Byte; assembler; register;
-asm
-        MOV     DX, AX
-        IN      AL, DX
+uses
+  Windows, SysUtils;
+
+type
+  TInp32 = function(Addr: SmallInt): SmallInt; stdcall;
+  TOut32 = procedure(Addr: SmallInt; Value: SmallInt); stdcall;
+
+var
+  hInpOutDll: THandle = 0;
+  fnInp32: TInp32 = nil;
+  fnOut32: TOut32 = nil;
+
+function IsIOReady: Boolean;
+begin
+  Result := (hInpOutDll <> 0) and Assigned(fnInp32) and Assigned(fnOut32);
 end;
 
-function PortReadWord(Addr: Word): Word; assembler; register;
-asm
-        MOV     DX, AX
-        IN      AX, DX
+function InitIO: Boolean;
+var
+  DllPath: string;
+begin
+  Result := False;
+  if hInpOutDll <> 0 then
+  begin
+    Result := True;
+    Exit;
+  end;
+
+  DllPath := ExtractFilePath(ParamStr(0)) + 'inpout32.dll';
+  hInpOutDll := LoadLibrary(PChar(DllPath));
+  if hInpOutDll = 0 then
+    Exit;
+
+  @fnInp32 := GetProcAddress(hInpOutDll, 'Inp32');
+  @fnOut32 := GetProcAddress(hInpOutDll, 'Out32');
+
+  if not Assigned(fnInp32) or not Assigned(fnOut32) then
+  begin
+    FreeLibrary(hInpOutDll);
+    hInpOutDll := 0;
+    fnInp32 := nil;
+    fnOut32 := nil;
+    Exit;
+  end;
+
+  Result := True;
 end;
 
-function PortReadWordLS(Addr: Word): Word; assembler; register;
-const
-  Delay = 150;
-asm
-        MOV     DX, AX
-        IN      AL, DX
-        MOV     ECX, Delay
-
-@1:
-        LOOP    @1
-        XCHG    AH, AL
-        INC     DX
-        IN      AL, DX
-        XCHG    AH, AL
+procedure FreeIO;
+begin
+  if hInpOutDll <> 0 then
+  begin
+    FreeLibrary(hInpOutDll);
+    hInpOutDll := 0;
+    fnInp32 := nil;
+    fnOut32 := nil;
+  end;
 end;
 
-procedure PortWriteByte(Addr: Word; Value: Byte); assembler; register;
-asm
-        XCHG    AX, DX
-        OUT     DX, AL
+function PortReadByte(Addr: Word): Byte;
+begin
+  Result := Byte(fnInp32(SmallInt(Addr)));
 end;
 
-procedure PortWriteWord(Addr: word; Value: word); assembler; register;
-asm
-        XCHG    AX, DX
-        OUT     DX, AX
+function PortReadWord(Addr: Word): Word;
+begin
+  Result := Word(fnInp32(SmallInt(Addr)));
 end;
 
-procedure PortWriteWordLS(Addr: word; Value: word); assembler; register;
-const
-  Delay = 150;
-asm
-        XCHG    AX, DX
-        OUT     DX, AL
-        MOV     ECX, Delay
+function PortReadWordLS(Addr: Word): Word;
+var
+  Lo, Hi: Byte;
+  i: Integer;
+begin
+  Lo := Byte(fnInp32(SmallInt(Addr)));
+  // small delay loop matching original ~150 cycle delay
+  for i := 0 to 149 do ;
+  Hi := Byte(fnInp32(SmallInt(Addr + 1)));
+  Result := Word(Hi) or (Word(Lo) shl 8);
+end;
 
-@1:
-        LOOP    @1
-        XCHG    AH, AL
-        INC     DX
-        OUT     DX, AL
+procedure PortWriteByte(Addr: Word; Value: Byte);
+begin
+  fnOut32(SmallInt(Addr), SmallInt(Value));
+end;
+
+procedure PortWriteWord(Addr: Word; Value: Word);
+begin
+  fnOut32(SmallInt(Addr), SmallInt(Value));
+end;
+
+procedure PortWriteWordLS(Addr: Word; Value: Word);
+var
+  i: Integer;
+begin
+  fnOut32(SmallInt(Addr), SmallInt(Lo(Value)));
+  // small delay loop matching original ~150 cycle delay
+  for i := 0 to 149 do ;
+  fnOut32(SmallInt(Addr + 1), SmallInt(Hi(Value)));
 end;
 
 end.
-

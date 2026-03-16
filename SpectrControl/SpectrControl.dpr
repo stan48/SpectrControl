@@ -6,7 +6,7 @@ uses
   IniFiles,
   Windows,
   SysUtils,
-  mainform in 'mainform.pas' {Main},
+  mainform in 'MAINFORM.pas' {Main},
   parametres in 'parametres.pas' {parform},
   DFS in 'DFS.pas' {DFS52},
   timef in 'timef.pas' {timeform},
@@ -25,7 +25,8 @@ uses
   peak in 'peak.pas',
   process in 'process.pas',
   SpecialTypes in 'SpecialTypes.pas',
-  peaksForm in 'peaksForm.pas';
+  peaksForm in 'peaksForm.pas',
+  io in 'io.pas';
 
 {$R *.RES}
 procedure getosinfo;
@@ -65,14 +66,14 @@ var
   hMutex: THandle;
 
 begin
-  hMutex := CreateMutex(nil, False, 'UniqueProgrammMutex');
+  hMutex := CreateMutex(nil, False, 'DFS52MTX');
   if WaitForSingleObject(hMutex, 0) <> wait_TimeOut then
   begin
     Application.Initialize;
     logo := tlogo.Create(Application);
     getosinfo;
 
-    logo.Position := poDesktopCenter;
+    logo.Position := poScreenCenter;
     logo.lbVers.Caption := main.ApplicationVersion;
     logo.Show;
 

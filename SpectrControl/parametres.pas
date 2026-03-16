@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, CustomizeDlg, ComCtrls, ExtCtrls, ImgList,
   Buttons,inifiles, Gradpanl,messdlgs, XiPanel, XiButton, ColorGrd,
-  DrawComboBox, gwiopm, spectrum;
+  DrawComboBox, spectrum, io;
 
 type
   TParForm = class(TForm)
@@ -837,57 +837,44 @@ begin
 end;
 
 procedure Tparform.XiButton1Click(Sender: TObject);
-var
-  status: dword;
 begin
-  status := gwiopm.GWIOPM_Driver.OpenSCM;
-  lbst.Caption := gwiopm.GWIOPM_Driver.ErrorLookup(status);
+  if io.InitIO then
+    lbst.Caption := 'InpOut32: Инициализирован'
+  else
+    lbst.Caption := 'InpOut32: Ошибка загрузки';
 end;
 
 procedure Tparform.XiButton4Click(Sender: TObject);
-var
-  status: dword;
 begin
-  status := gwiopm.GWIOPM_Driver.closeSCM;
-  lbst.Caption := gwiopm.GWIOPM_Driver.ErrorLookup(status);
+  io.FreeIO;
+  lbst.Caption := 'InpOut32: Выгружен';
 end;
 
 procedure Tparform.XiButton3Click(Sender: TObject);
-var
-  status: dword;
 begin
-  status := gwiopm.GWIOPM_Driver.Install('');
-  lbst.Caption := gwiopm.GWIOPM_Driver.ErrorLookup(status);
-
+  if io.InitIO then
+    lbst.Caption := 'InpOut32: Инициализирован'
+  else
+    lbst.Caption := 'InpOut32: Ошибка загрузки';
 end;
 
 procedure Tparform.XiButton2Click(Sender: TObject);
-var
-  status: dword;
 begin
-  if messdlgs.MessageDlg('Вы уверены, что хотите удалить драйвер GIVEO?', mtConfirmation, [mbYes, mbNo], 0) = 6 then
-  begin
-    status := gwiopm.GWIOPM_Driver.Remove;
-    lbst.Caption := gwiopm.GWIOPM_Driver.ErrorLookup(status);
-  end;
-
+  lbst.Caption := 'InpOut32: Драйвер GIVEO больше не нужен';
 end;
 
 procedure Tparform.XiButton6Click(Sender: TObject);
-var
-  status: dword;
 begin
-  status := gwiopm.GWIOPM_Driver.Start;
-  lbst.Caption := gwiopm.GWIOPM_Driver.ErrorLookup(status);
+  if io.InitIO then
+    lbst.Caption := 'InpOut32: Инициализирован'
+  else
+    lbst.Caption := 'InpOut32: Ошибка загрузки';
 end;
 
 procedure Tparform.XiButton5Click(Sender: TObject);
-var
-  status: dword;
 begin
-  status := gwiopm.GWIOPM_Driver.stop;
-  lbst.Caption := gwiopm.GWIOPM_Driver.ErrorLookup(status);
-
+  io.FreeIO;
+  lbst.Caption := 'InpOut32: Выгружен';
 end;
 
 procedure Tparform.xbSetCorrectClick(Sender: TObject);

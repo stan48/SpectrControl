@@ -3,7 +3,7 @@
 interface
 
 uses
-  windows, SysUtils, Classes, Forms, io, xygraph, spectrum, messages, 
+  windows, SysUtils, Classes, Forms, io, xygraph, spectrum, messages,
   specialtypes;
 
 type
@@ -94,157 +94,84 @@ begin
   SetPriorityClass(GetCurrentProcess, REALTIME_PRIORITY_CLASS);
   SetThreadPriority(GetCurrentThread, THREAD_PRIORITY_TIME_CRITICAL);
 
- {asm
-    cli
-  end;}
-
   dfscontrol.Boost_Left(_interval, 0);
 
   _stepmes := 0;
   i := 0;
 
   xygraph.xypen.Color := _spectrum.Color;
-  repeat  //начало всего цикла измерения
+  repeat
 
-    asm
-        XOR     eax, eax
-        XOR     edx, edx
-        mov     al, 025h
-        mov     dx, 037ah
-        OUT     dx, al
-    end;
+    io.PortWriteByte($37A, $25);
 
     x1 := rdtsc;
     repeat
       x2 := rdtsc
     until x2 >= (_cpuspd + x1);
 
-    asm
-        XOR     eax, eax
-        XOR     edx, edx
-        mov     al, 00ch
-        mov     dx, 037ah
-        OUT     dx, al
-    end;
+    io.PortWriteByte($37A, $0C);
 
     s := 0;
-    repeat //начало вращения двигателя
+    repeat
 
       dec(j);
       if j = 255 then
         j := 3;
       ph := ArrPhase[j];
 
-      asm
-        XOR     eax, eax
-        XOR     edx, edx
-        mov     al, ph
-        add     al, HighVoltage
-        mov     dx, 0378h
-        OUT     dx, al
-        XOR     eax, eax
-        XOR     edx, edx
-      end;
+      io.PortWriteByte($378, ph + HighVoltage);
 
       x1 := rdtsc;
       repeat
-        asm
-        XOR     eax, eax
-        XOR     edx, edx
-        end;
         x2 := rdtsc
       until x2 >= (_cpuspd * _interval + x1);
 
       inc(s);
 
-    until s = _spm; //окончание вращения двигателя
+    until s = _spm;
 
-//начало снятие показаний счетчика
-    asm
-        mov     al, 2fh
-        mov     dx, 037ah
-        OUT     dx, al
-        XOR     eax, eax
-        XOR     edx, edx
-    end;
+    io.PortWriteByte($37A, $2F);
 
     x1 := rdtsc;
     repeat
       x2 := rdtsc
     until x2 >= (_cpuspd + x1);
 
-    asm
-        mov     al, 2dh
-        mov     dx, 037ah
-        OUT     dx, al
-        XOR     eax, eax
-        XOR     edx, edx
-    end;
+    io.PortWriteByte($37A, $2D);
 
     x1 := rdtsc;
     repeat
       x2 := rdtsc
     until x2 >= (_cpuspd + x1);
 
-    asm
-        mov     al, 2bh
-        mov     dx, 037ah
-        OUT     dx, al
-        XOR     eax, eax
-        XOR     edx, edx
-    end;
+    io.PortWriteByte($37A, $2B);
 
     x1 := rdtsc;
     repeat
       x2 := rdtsc
     until x2 >= (_cpuspd + x1);
 
-    asm
-        XOR     eax, eax
-        XOR     edx, edx
-        mov     dx, 0378h
-        IN      al, dx
-        mov     count1, al
-    end;
+    count1 := io.PortReadByte($378);
 
     x1 := rdtsc;
     repeat
       x2 := rdtsc
     until x2 >= (_cpuspd + x1);
 
-    asm
-        XOR     eax, eax
-        XOR     edx, edx
-        mov     al, 29h
-        mov     dx, 037ah
-        OUT     dx, al
-    end;
+    io.PortWriteByte($37A, $29);
 
     x1 := rdtsc;
     repeat
       x2 := rdtsc
     until x2 >= (_cpuspd + x1);
 
-    asm
-        XOR     eax, eax
-        XOR     edx, edx
-        mov     dx, 0378h
-        IN      al, dx
-        mov     count2, al
-        XOR     ax, ax
-        mov     ah, count2
-        mov     al, count1
-        mov     count, ax
-        XOR     eax, eax
-        XOR     edx, edx
-        mov     key, 0
-        IN      AL, 60h
-        cmp     al, 1
-        jne     @metka
-        mov     key, 1
+    count2 := io.PortReadByte($378);
+    count := Word(count2) shl 8 + Word(count1);
 
-@metka:
-    end;
+    if GetAsyncKeyState(VK_ESCAPE) and $8000 <> 0 then
+      key := 1
+    else
+      key := 0;
 
     Inc(_stepmes, s);
 
@@ -282,7 +209,6 @@ begin
 
     inc(i);
     x2 := rdtsc;
-//showmessage(FloatToStr((x2-x1)));
 
     if key = 1 then
     begin
@@ -303,10 +229,6 @@ begin
     io.PortWriteByte($37a, $0c);
     io.PortWriteByte($378, (0 + HighVoltage));
   end;
-
-{asm
-sti
-end;}
 
   SetThreadPriority(GetCurrentThread, Priority);
   SetPriorityClass(GetCurrentProcess, PriorityClass);
@@ -367,147 +289,77 @@ begin
 
   xygraph.xypen.Color := _spectrum.Color;
 
-  repeat //начало цикла измерений
+  repeat
 
-    asm
-        XOR     eax, eax
-        XOR     edx, edx
-        mov     al, 025h
-        mov     dx, 037ah
-        OUT     dx, al
-    end;
+    io.PortWriteByte($37A, $25);
 
     x1 := rdtsc;
     repeat
       x2 := rdtsc
     until x2 >= (_cpuspd + x1);
 
-    asm
-        XOR     eax, eax
-        XOR     edx, edx
-        mov     al, 00ch
-        mov     dx, 037ah
-        OUT     dx, al
-    end;
+    io.PortWriteByte($37A, $0C);
 
     s := 0;
-    repeat //начало вращения двигателя
+    repeat
 
       Inc(j);
       if j = 4 then
         j := 0;
       ph := ArrPhase[j];
 
-      asm
-        XOR     eax, eax
-        XOR     edx, edx
-        mov     al, ph
-        add     al, HighVoltage
-        mov     dx, 0378h
-        OUT     dx, al
-        XOR     eax, eax
-        XOR     edx, edx
-      end;
+      io.PortWriteByte($378, ph + HighVoltage);
 
       x1 := rdtsc;
       repeat
-        asm
-        XOR     eax, eax
-        XOR     edx, edx
-        end;
         x2 := rdtsc
       until x2 >= (_cpuspd * _inetrval + x1);
 
       inc(s);
-    until s = _spm; //окончание вращения двигателя
+    until s = _spm;
 
-//опрос счетчика
-    asm
-        mov     al, 2fh
-        mov     dx, 037ah
-        OUT     dx, al
-        XOR     eax, eax
-        XOR     edx, edx
-    end;
+    io.PortWriteByte($37A, $2F);
 
     x1 := rdtsc;
     repeat
       x2 := rdtsc
     until x2 >= (_cpuspd + x1);
 
-    asm
-        mov     al, 2dh
-        mov     dx, 037ah
-        OUT     dx, al
-        XOR     eax, eax
-        XOR     edx, edx
-    end;
+    io.PortWriteByte($37A, $2D);
 
     x1 := rdtsc;
     repeat
       x2 := rdtsc
     until x2 >= (_cpuspd + x1);
 
-    asm
-        mov     al, 2bh
-        mov     dx, 037ah
-        OUT     dx, al
-        XOR     eax, eax
-        XOR     edx, edx
-    end;
+    io.PortWriteByte($37A, $2B);
 
     x1 := rdtsc;
     repeat
       x2 := rdtsc
     until x2 >= (_cpuspd + x1);
 
-    asm
-        XOR     eax, eax
-        XOR     edx, edx
-        mov     dx, 0378h
-        IN      al, dx
-        mov     count1, al
-    end;
+    count1 := io.PortReadByte($378);
 
     x1 := rdtsc;
     repeat
       x2 := rdtsc
     until x2 >= (_cpuspd + x1);
 
-    asm
-        XOR     eax, eax
-        XOR     edx, edx
-        mov     al, 29h
-        mov     dx, 037ah
-        OUT     dx, al
-    end;
+    io.PortWriteByte($37A, $29);
 
     x1 := rdtsc;
     repeat
       x2 := rdtsc
     until x2 >= (_cpuspd + x1);
 
-    asm
-        XOR     eax, eax
-        XOR     edx, edx
-        mov     dx, 0378h
-        IN      al, dx
-        mov     count2, al
-        XOR     ax, ax
-        mov     ah, count2
-        mov     al, count1
-        mov     count, ax
-        XOR     eax, eax
-        XOR     edx, edx
-//проверяем, не остановлен ли процесс
-        mov     key, 0
-        IN      AL, 60h
-        cmp     al, 1
-        jne     @metka
-        mov     key, 1
+    count2 := io.PortReadByte($378);
+    count := Word(count2) shl 8 + Word(count1);
 
-@metka:
-    end;
+    if GetAsyncKeyState(VK_ESCAPE) and $8000 <> 0 then
+      key := 1
+    else
+      key := 0;
 
     Inc(_stepmes, s);
 
@@ -565,10 +417,6 @@ begin
     io.PortWriteByte($378, (0 + HighVoltage));
   end;
 
-{asm
-   sti
- end;}
-
   SetThreadPriority(GetCurrentThread, Priority);
   SetPriorityClass(GetCurrentProcess, PriorityClass);
 
@@ -618,9 +466,6 @@ begin
   SetPriorityClass(GetCurrentProcess, REALTIME_PRIORITY_CLASS);
   SetThreadPriority(GetCurrentThread, THREAD_PRIORITY_TIME_CRITICAL);
 
- //asm
- // cli
- // end;
   sleep(1200);
   io.PortWriteByte($37a, $0c);
   io.PortWriteByte($378, (0 + HighVoltage));
@@ -630,142 +475,71 @@ begin
 
   xygraph.xypen.Color := _spectrum.Color;
 
-  repeat  //начало всего цикла измерения
+  repeat
 
-    asm
-        XOR     eax, eax
-        XOR     edx, edx
-        mov     al, 025h
-        mov     dx, 037ah
-        OUT     dx, al
-    end;
+    io.PortWriteByte($37A, $25);
 
     x1 := rdtsc;
     repeat
       x2 := rdtsc
     until x2 >= (_cpuspd + x1);
 
-    asm
-        XOR     eax, eax
-        XOR     edx, edx
-        mov     al, 00ch
-        mov     dx, 037ah
-        OUT     dx, al
-    end;
+    io.PortWriteByte($37A, $0C);
 
     x1 := rdtsc;
     repeat
       x2 := rdtsc
     until x2 >= (_cpuspd + x1);
 
-    asm
-        XOR     eax, eax
-        XOR     edx, edx
-        mov     al, 80
-        add     al, HighVoltage
-        mov     dx, 0378h
-        OUT     dx, al
-        XOR     eax, eax
-        XOR     edx, edx
-    end;
+    io.PortWriteByte($378, 80 + HighVoltage);
 
     x1 := rdtsc;
     repeat
-      asm
-        XOR     eax, eax
-        XOR     edx, edx
-      end;
       x2 := rdtsc
     until x2 >= (_cpuspd * _discrTime + x1);
 
-
-//начало снятие показаний счетчика
-    asm
-        mov     al, 2fh
-        mov     dx, 037ah
-        OUT     dx, al
-        XOR     eax, eax
-        XOR     edx, edx
-    end;
+    io.PortWriteByte($37A, $2F);
 
     x1 := rdtsc;
     repeat
       x2 := rdtsc
     until x2 >= (_cpuspd + x1);
 
-    asm
-        mov     al, 2dh
-        mov     dx, 037ah
-        OUT     dx, al
-        XOR     eax, eax
-        XOR     edx, edx
-    end;
+    io.PortWriteByte($37A, $2D);
 
     x1 := rdtsc;
     repeat
       x2 := rdtsc
     until x2 >= (_cpuspd + x1);
 
-    asm
-        mov     al, 2bh
-        mov     dx, 037ah
-        OUT     dx, al
-        XOR     eax, eax
-        XOR     edx, edx
-    end;
+    io.PortWriteByte($37A, $2B);
 
     x1 := rdtsc;
     repeat
       x2 := rdtsc
     until x2 >= (_cpuspd + x1);
 
-    asm
-        XOR     eax, eax
-        XOR     edx, edx
-        mov     dx, 0378h
-        IN      al, dx
-        mov     count1, al
-    end;
+    count1 := io.PortReadByte($378);
 
     x1 := rdtsc;
     repeat
       x2 := rdtsc
     until x2 >= (_cpuspd + x1);
 
-    asm
-        XOR     eax, eax
-        XOR     edx, edx
-        mov     al, 29h
-        mov     dx, 037ah
-        OUT     dx, al
-    end;
+    io.PortWriteByte($37A, $29);
 
     x1 := rdtsc;
     repeat
       x2 := rdtsc
     until x2 >= (_cpuspd + x1);
 
-    asm
-        XOR     eax, eax
-        XOR     edx, edx
-        mov     dx, 0378h
-        IN      al, dx
-        mov     count2, al
-        XOR     ax, ax
-        mov     ah, count2
-        mov     al, count1
-        mov     count, ax
-        XOR     eax, eax
-        XOR     edx, edx
-//проверяем нажатие Esc
-        mov     key, 0
-        IN      al, 60h
-        cmp     al, 1
-        jne     @metka
-        mov     key, 1
+    count2 := io.PortReadByte($378);
+    count := Word(count2) shl 8 + Word(count1);
 
-@metka:
-    end;
+    if GetAsyncKeyState(VK_ESCAPE) and $8000 <> 0 then
+      key := 1
+    else
+      key := 0;
 
     Inc(_currentTime, _discrTime);
 
@@ -804,9 +578,6 @@ begin
   io.PortWriteByte($37a, $0c);
   io.PortWriteByte($378, (0 + HighVoltage));
 
-//asm
-// sti
-//end;
   SetThreadPriority(GetCurrentThread, Priority);
   SetPriorityClass(GetCurrentProcess, PriorityClass);
 
@@ -820,4 +591,3 @@ end;
 {$ENDREGION}
 
 end.
-

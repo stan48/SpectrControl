@@ -7,7 +7,7 @@ object parform: Tparform
   ClientHeight = 344
   ClientWidth = 615
   Color = 15132390
-  Font.Charset = DEFAULT_CHARSET
+  Font.Charset = RUSSIAN_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
@@ -160,7 +160,6 @@ object parform: Tparform
             Width = 11
             Height = 16
             Caption = 'a:'
-            Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
             Font.Height = -13
             Font.Name = 'MS Sans Serif'
@@ -174,7 +173,6 @@ object parform: Tparform
             Width = 11
             Height = 16
             Caption = 'b:'
-            Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
             Font.Height = -13
             Font.Name = 'MS Sans Serif'
@@ -1128,7 +1126,6 @@ object parform: Tparform
     BeginColor = clSilver
     EndColor = 15132390
     Caption = 'gp1'
-    Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
     Font.Height = -13
     Font.Name = 'MS Sans Serif'

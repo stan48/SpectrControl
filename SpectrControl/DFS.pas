@@ -1,4 +1,4 @@
-unit DFS;
+п»їunit DFS;
 
 interface
 
@@ -63,7 +63,7 @@ end;
 
 procedure TDFS52.xbCalobrClick(Sender: TObject);
 begin
-  if messdlgs.MessageDlg('Выполнить калибровку?', mtConfirmation, [mbYes, mbNo], 0) = 6 then
+  if messdlgs.MessageDlg('Р’С‹РїРѕР»РЅРёС‚СЊ РєР°Р»РёР±СЂРѕРІРєСѓ?', mtConfirmation, [mbYes, mbNo], 0) = 6 then
   begin
     dfs52.Close;
     mainform.Main.mbox.Repaint;

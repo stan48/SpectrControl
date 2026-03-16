@@ -1,4 +1,4 @@
-unit xygraph3d;
+﻿unit xygraph3d;
 
 {=========================================================================}
 { See Copyright notes at XYGRAPH.                                         }

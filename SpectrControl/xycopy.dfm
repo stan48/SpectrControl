@@ -11,7 +11,7 @@ object CopyForm: TCopyForm
   Constraints.MaxWidth = 160
   Constraints.MinHeight = 254
   Constraints.MinWidth = 160
-  Font.Charset = DEFAULT_CHARSET
+  Font.Charset = RUSSIAN_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
@@ -44,7 +44,6 @@ object CopyForm: TCopyForm
     Width = 62
     Height = 45
     Caption = 'GO'
-    Font.Charset = DEFAULT_CHARSET
     Font.Color = clGreen
     Font.Height = -16
     Font.Name = 'MS Sans Serif'
@@ -68,7 +67,6 @@ object CopyForm: TCopyForm
     Width = 73
     Height = 23
     Caption = 'Cancel'
-    Font.Charset = DEFAULT_CHARSET
     Font.Color = clRed
     Font.Height = -11
     Font.Name = 'MS Sans Serif'
@@ -83,7 +81,6 @@ object CopyForm: TCopyForm
     Width = 138
     Height = 22
     Style = csDropDownList
-    Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -11
     Font.Name = 'Arial'

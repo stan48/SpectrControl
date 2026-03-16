@@ -1,10 +1,10 @@
-unit Crypt;
+п»їunit Crypt;
 
 interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, ComCtrls,
-  ExtCtrls, Buttons, Variants, Menus, Dialogs, CheckLst, gwiopm;
+  ExtCtrls, Buttons, Variants, Menus, Dialogs, CheckLst;
 
 function EncryptEX(const InString: string): string;
 
@@ -14,7 +14,7 @@ function StrToAscii(S: string): string;
 
 function ASCIIToStr(AsciiString: string): string;
 
-// обязательно смените ключи до использования
+// РѕР±СЏР·Р°С‚РµР»СЊРЅРѕ СЃРјРµРЅРёС‚Рµ РєР»СЋС‡Рё РґРѕ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёСЏ
 const
   StartKey = 471; // Start default key
   MultKey = 62142; // Mult default key

@@ -6,13 +6,13 @@ object logo: Tlogo
   ClientHeight = 254
   ClientWidth = 401
   Color = clBtnFace
-  Font.Charset = DEFAULT_CHARSET
+  Font.Charset = RUSSIAN_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
   Font.Style = []
   OldCreateOrder = False
-  Position = poDesigned
+  Position = poDefault
   PixelsPerInch = 96
   TextHeight = 13
   object XiPanel1: TXiPanel
@@ -27,7 +27,6 @@ object logo: Tlogo
     ColorScheme = csSilver
     FillDirection = fdVertical
     Align = alClient
-    Font.Charset = DEFAULT_CHARSET
     Font.Color = clNavy
     Font.Height = -67
     Font.Name = 'Times New Roman'
@@ -1428,9 +1427,8 @@ object logo: Tlogo
       Width = 71
       Height = 15
       BiDiMode = bdLeftToRight
-      Caption = 'Windows XP'
+      Caption = 'Windows'
       Color = clBtnFace
-      Font.Charset = DEFAULT_CHARSET
       Font.Color = 6645094
       Font.Height = -13
       Font.Name = 'Times New Roman'
@@ -1451,7 +1449,6 @@ object logo: Tlogo
       BiDiMode = bdLeftToRight
       Caption = #1086#1087#1088#1077#1076#1077#1083#1077#1085#1080#1077'...'
       Color = clBtnFace
-      Font.Charset = DEFAULT_CHARSET
       Font.Color = 6645094
       Font.Height = -13
       Font.Name = 'Times New Roman'
@@ -1472,7 +1469,6 @@ object logo: Tlogo
       BiDiMode = bdLeftToRight
       Caption = #1079#1072#1075#1088#1091#1079#1082#1072'...'
       Color = clBtnFace
-      Font.Charset = DEFAULT_CHARSET
       Font.Color = 6645094
       Font.Height = -13
       Font.Name = 'Times New Roman'
@@ -1493,7 +1489,6 @@ object logo: Tlogo
       BiDiMode = bdLeftToRight
       Caption = '2.5.6'
       Color = clBtnFace
-      Font.Charset = DEFAULT_CHARSET
       Font.Color = 6645094
       Font.Height = -13
       Font.Name = 'Times New Roman'

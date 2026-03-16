@@ -1,4 +1,4 @@
-﻿{$A-,H+}
+{$A-,H+}
 unit mainform;
 
 interface
@@ -27,7 +27,6 @@ type
     Label5: TLabel;
     Label8: TLabel;
     Label3: TLabel;
-    Label17: TLabel;
     lbFrom: TLabel;
     lbTo: TLabel;
     lbSPM: TLabel;
@@ -101,6 +100,7 @@ type
     N1: TMenuItem;
     N2: TMenuItem;
     pbEngine: TPaintBox;
+    lbl1: TLabel;
 
     procedure N2Click(Sender: TObject);
     procedure N1Click(Sender: TObject);

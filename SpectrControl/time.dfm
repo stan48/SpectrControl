@@ -5,7 +5,7 @@ object timeform: Ttimeform
   Height = 297
   Caption = 'timeform'
   Color = clBtnFace
-  Font.Charset = DEFAULT_CHARSET
+  Font.Charset = RUSSIAN_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
   Font.Name = 'MS Sans Serif'

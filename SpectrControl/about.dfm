@@ -7,7 +7,7 @@ object frmAbout: TfrmAbout
   ClientHeight = 275
   ClientWidth = 426
   Color = 15132390
-  Font.Charset = DEFAULT_CHARSET
+  Font.Charset = RUSSIAN_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
@@ -104,7 +104,6 @@ object frmAbout: TfrmAbout
     Width = 294
     Height = 20
     Caption = #1044#1060#1057'-52: '#1059#1087#1088#1072#1074#1083#1103#1102#1097#1072#1103' '#1087#1088#1086#1075#1088#1072#1084#1084#1072
-    Font.Charset = DEFAULT_CHARSET
     Font.Color = clDefault
     Font.Height = -16
     Font.Name = 'MS Sans Serif'
@@ -117,7 +116,6 @@ object frmAbout: TfrmAbout
     Width = 77
     Height = 16
     Caption = #1042#1077#1088#1089#1080#1103' 2.5.6'
-    Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -13
     Font.Name = 'MS Sans Serif'
@@ -131,7 +129,6 @@ object frmAbout: TfrmAbout
     Height = 13
     Alignment = taCenter
     Caption = #1043#1088#1086#1076#1085#1077#1085#1089#1082#1080#1081' '#1075#1086#1089#1091#1076#1072#1088#1089#1090#1074#1077#1085#1085#1099#1081' '#1091#1085#1080#1074#1077#1088#1089#1080#1090#1077#1090' '#1080#1084'. '#1071'. '#1050#1091#1087#1072#1083#1099'.'
-    Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -12
     Font.Name = 'MS Sans Serif'
@@ -238,7 +235,6 @@ object frmAbout: TfrmAbout
     Width = 348
     Height = 13
     Caption = #1051#1072#1073#1086#1088#1072#1090#1086#1088#1080#1103' '#1072#1074#1090#1086#1084#1072#1090#1080#1079#1072#1094#1080#1080' '#1092#1080#1079#1080#1095#1077#1089#1082#1086#1075#1086' '#1101#1082#1089#1087#1077#1088#1080#1084#1077#1085#1090#1072'.'
-    Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -12
     Font.Name = 'MS Sans Serif'
