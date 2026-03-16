@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, MessDlgs;
+  Dialogs, StdCtrls, MessDlgs, FloatUtils;
 
 type
   TTimeForm = class(TForm)
@@ -41,8 +41,8 @@ var
 begin
 
   try
-    ds := (strtofloat(ediscr.text)) / 1000;
-    tm := strtofloat(etime.Text);
+    ds := (StrToFloatSafe(ediscr.text)) / 1000;
+    tm := StrToFloatSafe(etime.Text);
   except
     on EConvertError do
     begin

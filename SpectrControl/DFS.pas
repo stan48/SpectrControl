@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, Buttons, ImgList, messdlgs,
-  XiButton, ExtCtrls;
+  XiButton, ExtCtrls, FloatUtils;
 
 type
   TDFS52 = class(TForm)
@@ -74,9 +74,9 @@ end;
 procedure TDFS52.xbStartClick(Sender: TObject);
 begin
   if rbFRW.Checked then
-    dfscontrol.RewindFRW(round(strtofloat(erew.Text)), strtoint(espeed.Text));
+    dfscontrol.RewindFRW(round(StrToFloatSafe(erew.Text)), strtoint(espeed.Text));
   if rbREW.Checked then
-    dfscontrol.RewindREW(round(strtofloat(erew.Text)), strtoint(espeed.Text));
+    dfscontrol.RewindREW(round(StrToFloatSafe(erew.Text)), strtoint(espeed.Text));
 end;
 
 end.

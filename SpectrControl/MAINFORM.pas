@@ -1,4 +1,4 @@
-{$A-,H+}
+﻿{$A-,H+}
 unit mainform;
 
 interface
@@ -6,8 +6,8 @@ interface
 uses
   Windows, SysUtils, Classes, Graphics, Controls, Forms, StdCtrls, ComCtrls,
   ExtCtrls, Menus, IniFiles, io, Dialogs, Math, MessDlgs, XiButton, logof,
-  AppEvnts, about, crypt, SpectrumCollection, Spectrum, Drawer,
-  FileHandler, substruction, process, SpecialTypes, ImgList, ToolWin;
+  AppEvnts, about, crypt, SpectrumCollection, Spectrum, Drawer, FileHandler,
+  substruction, process, SpecialTypes, ImgList, ToolWin, FloatUtils;
 
 type
   TMain = class(TForm)
@@ -233,6 +233,8 @@ var
   bt: byte;
 begin
 
+  Self.DoubleBuffered := True;  // убирает мерцание - WM_ERASEBKGND рисует в буфер
+
   cpuSpd := getcpuspeed;
   logo.lbcpu.Caption := inttostr(cpuSpd) + ' МГц';
   HighVoltage := 0;
@@ -434,11 +436,11 @@ label
   next, nextstep;
 begin
   try
-    Act := strtofloat(eactline.Text);
-    From := strtofloat(efrom.Text);
-    Towords := strtofloat(eTowards.Text);
-    spm := strtofloat(espm.Text);
-    int := strtofloat(einterval.Text);
+    Act := StrToFloatSafe(eactline.Text);
+    From := StrToFloatSafe(efrom.Text);
+    Towords := StrToFloatSafe(eTowards.Text);
+    spm := StrToFloatSafe(espm.Text);
+    int := StrToFloatSafe(einterval.Text);
     HvOff := strtoint(ehv.Text);
   except
     on EConvertError do
@@ -632,13 +634,13 @@ label
   next, nextstep;
 begin
   try
-    Act := strtofloat(eactline.Text);
-    From := strtofloat(efrom.Text);
-    Towords := strtofloat(eTowards.Text);
-    spm := strtofloat(espm.Text);
-    int := strtofloat(einterval.Text);
+    Act := StrToFloatSafe(eactline.Text);
+    From := StrToFloatSafe(efrom.Text);
+    Towords := StrToFloatSafe(eTowards.Text);
+    spm := StrToFloatSafe(espm.Text);
+    int := StrToFloatSafe(einterval.Text);
     HvOff := strtoint(ehv.Text);
-    wp := round(strtofloat(epause.Text));
+    wp := round(StrToFloatSafe(epause.Text));
   except
     on EConvertError do
     begin
@@ -827,12 +829,12 @@ label
   next, nextstep;
 begin
   try
-    from := 10000000 / (strtofloat(efrom.Text));
-    upto := 10000000 / (strtofloat(eTowards.Text));
-    spm := strtofloat(espm.Text);
-    int := strtofloat(einterval.Text);
+    from := 10000000 / (StrToFloatSafe(efrom.Text));
+    upto := 10000000 / (StrToFloatSafe(eTowards.Text));
+    spm := StrToFloatSafe(espm.Text);
+    int := StrToFloatSafe(einterval.Text);
     HvOff := strtoint(ehv.Text);
-    wp := round(strtofloat(epause.Text));
+    wp := round(StrToFloatSafe(epause.Text));
   except
     on EConvertError do
     begin
@@ -903,8 +905,8 @@ begin
   pr := efrom.Text + ':' + eTowards.Text;
 
   cStep := 0;
-  minx := min((strtofloat(efrom.Text)), (strtofloat(eTowards.Text)));
-  maxx := max((strtofloat(efrom.Text)), (strtofloat(eTowards.Text)));
+  minx := min((StrToFloatSafe(efrom.Text)), (StrToFloatSafe(eTowards.Text)));
+  maxx := max((StrToFloatSafe(efrom.Text)), (StrToFloatSafe(eTowards.Text)));
   exmin.Text := floattostr(minx);
   exmax.Text := floattostr(maxx);
 
@@ -1003,12 +1005,12 @@ label
   next, nextstep;
 begin
   try
-    From := 10000000 / (strtofloat(efrom.Text));
-    upto := 10000000 / (strtofloat(eTowards.Text));
-    spm := strtofloat(espm.Text);
-    int := strtofloat(einterval.Text);
+    From := 10000000 / (StrToFloatSafe(efrom.Text));
+    upto := 10000000 / (StrToFloatSafe(eTowards.Text));
+    spm := StrToFloatSafe(espm.Text);
+    int := StrToFloatSafe(einterval.Text);
     HvOff := strtoint(ehv.Text);
-    wp := round(strtofloat(epause.Text));
+    wp := round(StrToFloatSafe(epause.Text));
   except
     on EConvertError do
     begin
@@ -1078,8 +1080,8 @@ begin
     coment := '';
   pr := efrom.Text + ':' + eTowards.Text;
 
-  minx := min((strtofloat(efrom.Text)), (strtofloat(eTowards.Text)));
-  maxx := max((strtofloat(efrom.Text)), (strtofloat(eTowards.Text)));
+  minx := min((StrToFloatSafe(efrom.Text)), (StrToFloatSafe(eTowards.Text)));
+  maxx := max((StrToFloatSafe(efrom.Text)), (StrToFloatSafe(eTowards.Text)));
   exmin.Text := floattostr(minx);
   exmax.Text := floattostr(maxx);
   cStep := 0;
@@ -1192,10 +1194,10 @@ begin
   drawer.Refresh;
 
   try
-    act := strtofloat(eactline.Text);
-    place := strtofloat(efrom.Text);
-    AllTime := strtofloat(timeform.eTime.Text);
-    Discr := strtofloat(timeform.eDiscr.Text);
+    act := StrToFloatSafe(eactline.Text);
+    place := StrToFloatSafe(efrom.Text);
+    AllTime := StrToFloatSafe(timeform.eTime.Text);
+    Discr := StrToFloatSafe(timeform.eDiscr.Text);
     HvOff := strtoint(main.ehv.Text);
   except
     on EConvertError do
@@ -1266,7 +1268,6 @@ next:
   if HighVoltage = 0 then
     dfscontrol.HW_Status(true);
 
-  drawer.Refresh;
   Mestime := tmesthreadtime.Create(spectrum, D, T);
   mestime.Priority := tpTimeCritical;
   drawer.Refresh;
@@ -1422,7 +1423,7 @@ end;
 {$REGION ' mBox Events '}
 procedure TMain.mboxPaint(Sender: TObject);
 begin
-  drawer.Refresh;
+  drawer.PaintNow;  // рисуем сразу — мы уже внутри WM_PAINT
 end;
 
 procedure TMain.mbDelClick(Sender: TObject);
@@ -1632,10 +1633,10 @@ var
 begin
 
   try
-    nsteps := round(strtofloat(eover.Text));
-    fr := strtofloat(efrom.Text);
-    tow := strtofloat(eTowards.Text);
-    pause := round(StrToFloat(ePause.Text));
+    nsteps := round(StrToFloatSafe(eover.Text));
+    fr := StrToFloatSafe(efrom.Text);
+    tow := StrToFloatSafe(eTowards.Text);
+    pause := round(StrToFloatSafe(ePause.Text));
   except
     on EConvertError do
     begin
@@ -1688,10 +1689,10 @@ var
 begin
 
   try
-    minx := min(round(strtofloat(exmin.Text)), round(strtofloat(exmax.Text)));
-    maxx := max(round(strtofloat(exmin.Text)), round(strtofloat(exmax.Text)));
-    miny := min(round(strtofloat(eymin.Text)), round(strtofloat(eymax.Text)));
-    maxy := max(round(strtofloat(eymin.Text)), round(strtofloat(eymax.Text)));
+    minx := min(round(StrToFloatSafe(exmin.Text)), round(StrToFloatSafe(exmax.Text)));
+    maxx := max(round(StrToFloatSafe(exmin.Text)), round(StrToFloatSafe(exmax.Text)));
+    miny := min(round(StrToFloatSafe(eymin.Text)), round(StrToFloatSafe(eymax.Text)));
+    maxy := max(round(StrToFloatSafe(eymin.Text)), round(StrToFloatSafe(eymax.Text)));
   except
     on E: EConvertError do
     begin
@@ -1731,36 +1732,41 @@ var
   com, dt, pr: string;
 begin
 
-  lwSpectrumList.Clear;
-  if SpectrumList.Count = 0 then
-  begin
+  lwSpectrumList.Items.BeginUpdate;  // блокируем перерисовку на время обновления
+  try
+    lwSpectrumList.Clear;
+    if SpectrumList.Count = 0 then
+    begin
+      for index := 0 to lwmenu.Items.Count - 1 do
+        lwmenu.Items.Items[index].Enabled := false;
+      system.Exit;
+    end;
+
+    for i := 0 to SpectrumList.Count - 1 do
+    begin
+
+      lwSpectrumList.AddItem(floattostr(i + 1), SpectrumList[i]);
+
+      com := SpectrumList[i].coment;
+      dt := DateTimeToStr(SpectrumList[i].DateTime);
+      pr := SpectrumList[i].parameters;
+
+      lwSpectrumList.Items.Item[i].SubItems.Add(com);
+      lwSpectrumList.Items.Item[i].SubItems.Add(pr);
+      lwSpectrumList.Items.Item[i].SubItems.Add(dt);
+
+      if SpectrumList[i].Visible then
+        lwSpectrumList.Items.Item[i].Checked := true
+      else
+        lwSpectrumList.Items.Item[i].Checked := false;
+
+    end;
+
     for index := 0 to lwmenu.Items.Count - 1 do
-      lwmenu.Items.Items[index].Enabled := false;
-    system.Exit;
+      lwmenu.Items.Items[index].Enabled := true;
+  finally
+    lwSpectrumList.Items.EndUpdate;  // одна перерисовка вместо N
   end;
-
-  for i := 0 to SpectrumList.Count - 1 do
-  begin
-
-    lwSpectrumList.AddItem(floattostr(i + 1), SpectrumList[i]);
-
-    com := SpectrumList[i].coment;
-    dt := DateTimeToStr(SpectrumList[i].DateTime);
-    pr := SpectrumList[i].parameters;
-
-    lwSpectrumList.Items.Item[i].SubItems.Add(com);
-    lwSpectrumList.Items.Item[i].SubItems.Add(pr);
-    lwSpectrumList.Items.Item[i].SubItems.Add(dt);
-
-    if SpectrumList[i].Visible then
-      lwSpectrumList.Items.Item[i].Checked := true
-    else
-      lwSpectrumList.Items.Item[i].Checked := false;
-
-  end;
-
-  for index := 0 to lwmenu.Items.Count - 1 do
-    lwmenu.Items.Items[index].Enabled := true;
 end;
 
 procedure TMain.PaintEngine;
@@ -2203,7 +2209,7 @@ begin
   main.Enabled := false;
 
   // полная пауза в мс / 100 итераций
-  pauseMs := round(strtofloat(epause.Text) * 1000) div 100;
+  pauseMs := round(StrToFloatSafe(epause.Text) * 1000) div 100;
 
   GetAsyncKeyState(VK_ESCAPE);
 
@@ -2215,7 +2221,7 @@ begin
 
     if GetAsyncKeyState(VK_ESCAPE) and $8000 <> 0 then
       key := 1;
-      Break;
+    Break;
   end;
 
   MessDlgs.CloseStatus;

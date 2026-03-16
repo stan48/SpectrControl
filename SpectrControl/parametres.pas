@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, CustomizeDlg, ComCtrls, ExtCtrls, ImgList,
   Buttons,inifiles, Gradpanl,messdlgs, XiPanel, XiButton, ColorGrd,
-  DrawComboBox, spectrum, io;
+  DrawComboBox, spectrum, io, FloatUtils;
 
 type
   TParForm = class(TForm)
@@ -562,8 +562,8 @@ label
   loop, next;
 begin
   try
-    a1 := strtofloat(ea.Text);
-    b1 := strtofloat(eb.Text);
+    a1 := StrToFloatSafe(ea.Text);
+    b1 := StrToFloatSafe(eb.Text);
   except
     on EConvertError do
     begin
@@ -883,8 +883,8 @@ var
   pl: byte;
 begin
   try
-    x1 := strtofloat(eet.Text);
-    x2 := strtofloat(ecur.Text);
+    x1 := StrToFloatSafe(eet.Text);
+    x2 := StrToFloatSafe(ecur.Text);
   except
     on eConvertError do
     begin
@@ -993,19 +993,19 @@ end;
 procedure Tparform.eRetChange(Sender: TObject);
 begin
   if eret.Text <> '' then
-    lbret.Caption := floattostr(trunc((1000000 * a * 60) / (strtofloat(eret.Text)))) + ' обр.см./мин.';
+    lbret.Caption := floattostr(trunc((1000000 * a * 60) / (StrToFloatSafe(eret.Text)))) + ' обр.см./мин.';
 end;
 
 procedure Tparform.eInitChange(Sender: TObject);
 begin
   if einit.Text <> '' then
-    lbinit.Caption := floattostr(trunc((1000000 * a * 60) / (strtofloat(einit.Text)))) + ' обр.см./мин.';
+    lbinit.Caption := floattostr(trunc((1000000 * a * 60) / (StrToFloatSafe(einit.Text)))) + ' обр.см./мин.';
 end;
 
 procedure Tparform.eStartingChange(Sender: TObject);
 begin
   if eStarting.Text <> '' then
-    lbstarting.Caption := Format('%.2f', [(strtofloat(estarting.Text) * a)]) + ' обр.см.';
+    lbstarting.Caption := Format('%.2f', [(StrToFloatSafe(estarting.Text) * a)]) + ' обр.см.';
 end;
 
 end.

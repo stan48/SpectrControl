@@ -26,7 +26,8 @@ uses
   process in 'process.pas',
   SpecialTypes in 'SpecialTypes.pas',
   peaksForm in 'peaksForm.pas',
-  io in 'io.pas';
+  io in 'io.pas',
+  FloatUtils in 'FloatUtils.pas';
 
 {$R *.RES}
 procedure getosinfo;
