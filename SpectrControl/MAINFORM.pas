@@ -6,7 +6,7 @@ interface
 uses
   Windows, SysUtils, Classes, Graphics, Controls, Forms, StdCtrls, ComCtrls,
   ExtCtrls, Menus, IniFiles, io, Dialogs, Math, MessDlgs, XiButton, logof,
-  AppEvnts, about, TeEngine, crypt, SpectrumCollection, Spectrum, Drawer,
+  AppEvnts, about, crypt, SpectrumCollection, Spectrum, Drawer,
   FileHandler, substruction, process, SpecialTypes, ImgList, ToolWin;
 
 type
