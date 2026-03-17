@@ -17,6 +17,7 @@ procedure PortWriteWordLS(Addr: Word; Value: Word);
 function InitIO: Boolean;
 procedure FreeIO;
 function IsIOReady: Boolean;
+function IsDriverOpen: Boolean;
 
 implementation
 
@@ -26,15 +27,25 @@ uses
 type
   TInp32 = function(Addr: SmallInt): SmallInt; stdcall;
   TOut32 = procedure(Addr: SmallInt; Value: SmallInt); stdcall;
+  TIsInpOutDriverOpen = function: Boolean; stdcall;
 
 var
   hInpOutDll: THandle = 0;
   fnInp32: TInp32 = nil;
   fnOut32: TOut32 = nil;
+  fnIsDriverOpen: TIsInpOutDriverOpen = nil;
 
 function IsIOReady: Boolean;
 begin
   Result := (hInpOutDll <> 0) and Assigned(fnInp32) and Assigned(fnOut32);
+end;
+
+function IsDriverOpen: Boolean;
+begin
+  if Assigned(fnIsDriverOpen) then
+    Result := fnIsDriverOpen
+  else
+    Result := False;
 end;
 
 function InitIO: Boolean;
@@ -55,6 +66,7 @@ begin
 
   @fnInp32 := GetProcAddress(hInpOutDll, 'Inp32');
   @fnOut32 := GetProcAddress(hInpOutDll, 'Out32');
+  @fnIsDriverOpen := GetProcAddress(hInpOutDll, 'IsInpOutDriverOpen');
 
   if not Assigned(fnInp32) or not Assigned(fnOut32) then
   begin
@@ -62,6 +74,7 @@ begin
     hInpOutDll := 0;
     fnInp32 := nil;
     fnOut32 := nil;
+    fnIsDriverOpen := nil;
     Exit;
   end;
 
@@ -76,6 +89,7 @@ begin
     hInpOutDll := 0;
     fnInp32 := nil;
     fnOut32 := nil;
+    fnIsDriverOpen := nil;
   end;
 end;
 

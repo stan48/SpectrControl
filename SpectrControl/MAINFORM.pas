@@ -6,8 +6,8 @@ interface
 uses
   Windows, SysUtils, Classes, Graphics, Controls, Forms, StdCtrls, ComCtrls,
   ExtCtrls, Menus, IniFiles, io, Dialogs, Math, MessDlgs, XiButton, logof,
-  AppEvnts, about, crypt, SpectrumCollection, Spectrum, Drawer, FileHandler,
-  substruction, process, SpecialTypes, ImgList, ToolWin, FloatUtils;
+  AppEvnts, AboutForm, crypt, SpectrumCollection, Spectrum, Drawer, FileHandler,
+  substruction, process, SpecialTypes, ImgList, ToolWin, FloatUtils, SysInfo;
 
 type
   TMain = class(TForm)
@@ -165,7 +165,6 @@ type
   public
     { Public declarations }
     procedure Start_Point_Scan;
-    function GetCPUSpeed: cardinal;
     procedure SetHz;
     function Average: TSpectrum;
     procedure RefreshTable;
@@ -178,7 +177,6 @@ type
 var
   Main: TMain;
   Interval: cardinal;
-  cpuSpd: cardinal;
   HighVoltage: byte;
   HvOff: cardinal;
   SpectrumList: TSpectrumCollection;
@@ -235,8 +233,7 @@ begin
 
   Self.DoubleBuffered := True;  // убирает мерцание - WM_ERASEBKGND рисует в буфер
 
-  cpuSpd := getcpuspeed;
-  logo.lbcpu.Caption := inttostr(cpuSpd) + ' МГц';
+  logo.lbcpu.Caption := SysInfo.GetCPUName;
   HighVoltage := 0;
   j := 0;
 
@@ -387,38 +384,6 @@ begin
   io.PortWriteByte($37a, $0c);
   io.PortWriteByte($378, 0);
   startup.StopDriver;
-end;
-
-function TMain.GetCPUSpeed: cardinal;
-const
-  DelayTime = 1500;
-var
-  TimerHi: DWORD;
-  TimerLo: DWORD;
-  PriorityClass: Integer;
-  Priority: Integer;
-begin
-  PriorityClass := GetPriorityClass(GetCurrentProcess);
-  Priority := GetThreadPriority(GetCurrentThread);
-  SetPriorityClass(GetCurrentProcess, REALTIME_PRIORITY_CLASS);
-  SetThreadPriority(GetCurrentThread, THREAD_PRIORITY_TIME_CRITICAL);
-  Sleep(10);
-  asm
-        db      $0F, $31
-        MOV     TimerLo, EAX
-        MOV     TimerHi, EDX
-  end;
-  Sleep(DelayTime);
-  asm
-        db      $0F, $31
-        SUB     EAX, TimerLo
-        SUB     EDX, TimerHi
-        MOV     TimerLo, EAX
-        MOV     TimerHi, EDX
-  end;
-  SetThreadPriority(GetCurrentThread, Priority);
-  SetPriorityClass(GetCurrentProcess, PriorityClass);
-  result := trunc((TimerLo) / (1000 * delaytime));
 end;
 
 procedure TMain.Start_SM_LeftScan(steps: Byte; overridePause: Cardinal);

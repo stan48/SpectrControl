@@ -1,4 +1,4 @@
-﻿unit dfscontrol;
+unit dfscontrol;
 
 interface
 
@@ -21,31 +21,29 @@ procedure Cymomentr;
 
 function IsSpectEnabled: boolean;
 
+procedure WaitMicroseconds(Microseconds: Cardinal);
+
 implementation
 
 uses
   mainform, parametres;
 
-function RDTSC: int64;
-asm
-      db      0Fh, 31h
-end;
-
-procedure Wait(const Delay: Cardinal);
-  function rd: int64;
-  asm
-        db      0Fh, 31h
-  end;
-
 var
-  x1, x2: int64;
-begin
-  x1 := rd;
-  repeat
-    x2 := rd;
-  until x2 >= (cpuSpd * Delay + x1);
-end;
+  QPCFreq: Int64;
 
+// Пауза в микросекундах на основе QueryPerformanceCounter.
+// Заменяет все RDTSC-based busy-wait.
+procedure WaitMicroseconds(Microseconds: Cardinal);
+var
+  Start, Now: Int64;
+  Target: Int64;
+begin
+  Target := (QPCFreq * Microseconds) div 1000000;
+  QueryPerformanceCounter(Start);
+  repeat
+    QueryPerformanceCounter(Now);
+  until (Now - Start) >= Target;
+end;
 
 procedure HW_Status(Enabled: boolean);
 var
@@ -55,9 +53,9 @@ begin
   begin
     HighVoltage := 128;
     io.PortWriteByte($37a, $0c);
-    Wait(1000);
+    WaitMicroseconds(1000);
     portstatus := io.PortReadByte($378);
-    Wait(1000);
+    WaitMicroseconds(1000);
     io.PortWriteByte($378, (128 + portstatus));
     main.shapeHV.Brush.Color := clRed;
     main.cbHigh.Checked := true;
@@ -67,9 +65,9 @@ begin
   if Enabled = false then
   begin
     io.PortWriteByte($37a, $0c);
-    Wait(1000);
+    WaitMicroseconds(1000);
     portstatus := io.PortReadByte($378);
-    Wait(1000);
+    WaitMicroseconds(1000);
     io.PortWriteByte($378, (portstatus - HighVoltage));
     HighVoltage := 0;
     main.shapeHV.Brush.Color := clGray;
@@ -100,7 +98,7 @@ begin
       if j = 4 then
         j := 0;
       io.PortWriteByte($378, (ArrPhase[j] + HighVoltage));
-      Wait(700);
+      WaitMicroseconds(700);
 
     until io.PortReadByte($379) = rep;
     messdlgs.UpdateStatus(20, 'Этап 2 из 4. Привязка к началу шкалы.');
@@ -112,7 +110,7 @@ begin
     if j = 255 then
       j := 3;
     io.PortWriteByte($378, (ArrPhase[j] + HighVoltage));
-    Wait(700);
+    WaitMicroseconds(700);
   until io.PortReadByte($379) = repfin;
   messdlgs.UpdateStatus(40, 'Этап 2 из 4. Привязка к началу шкалы.');
  //крутим вправо до финального сигнала отражения
@@ -121,7 +119,7 @@ begin
     if j = 4 then
       j := 0;
     io.PortWriteByte($378, (ArrPhase[j] + HighVoltage));
-    Wait(5000);
+    WaitMicroseconds(5000);
   until io.PortReadByte($379) = rep;
   messdlgs.UpdateStatus(60, 'Этап 3 из 4. Коррекция положения.');
 
@@ -131,7 +129,7 @@ begin
     if j = 255 then
       j := 3;
     io.PortWriteByte($378, (ArrPhase[j] + HighVoltage));
-    Wait(5000);
+    WaitMicroseconds(5000);
   until io.PortReadByte($379) = repfin;
   messdlgs.UpdateStatus(80, 'Этап 4 из 4. Завершение установки.');
 
@@ -141,7 +139,7 @@ begin
     if j = 4 then
       j := 0;
     io.PortWriteByte($378, (ArrPhase[j] + HighVoltage));
-    Wait(50000);
+    WaitMicroseconds(50000);
   until io.PortReadByte($379) = fin;
 
   repeat
@@ -149,10 +147,10 @@ begin
     if j = 4 then
       j := 0;
     io.PortWriteByte($378, (ArrPhase[j] + HighVoltage));
-    Wait(50000);
+    WaitMicroseconds(50000);
   until (io.PortReadByte($379) = repfin) or (io.PortReadByte($379) = rep);
   messdlgs.UpdateStatus(100, 'Установка в начало шкалы завершена.');
-  wait(500000);
+  WaitMicroseconds(500000);
   messdlgs.CloseStatus;
   CurrentStep := 0;
   main.paintengine;
@@ -168,23 +166,6 @@ var
   Vinit, Vfin, V: real;
   PriorityClass: Integer;
   Priority: Integer;
-
-  procedure Wait(Delay: Cardinal);
-
-    function RDTSC: int64;
-    asm
-        DB      $0F, $31
-    end;
-
-  var
-    x1, x2: int64;
-  begin
-    x1 := RDTSC;
-    repeat
-      x2 := RDTSC;
-    until x2 >= (cpuspd * Delay + x1);
-  end;
-
 label
   exit;
 begin
@@ -201,7 +182,7 @@ begin
         Vfin := 1000000 / Fin;
         pause := init;
         step := 0;
-        wait(1000000);
+        WaitMicroseconds(1000000);
 
         repeat
           Dec(j);
@@ -209,7 +190,7 @@ begin
             j := 3;
           Inc(step);
           io.PortWriteByte($378, (ArrPhase[j] + HighVoltage));
-          Wait(pause);
+          WaitMicroseconds(pause);
           V := V + ((Vfin - Vinit)) / starting;
           pause := round(1000000 / V);
         until step = starting;
@@ -232,7 +213,7 @@ begin
           io.PortWriteByte($378, (ArrPhase[j] + HighVoltage));
           V := V + ((Vfin - Vinit)) / starting;
           pause := round(1000000 / V);
-          Wait(pause);
+          WaitMicroseconds(pause);
         until step = starting;
 
       end;
@@ -250,23 +231,6 @@ var
   Vinit, V, Vfin: real;
   PriorityClass: Integer;
   Priority: Integer;
-
-  procedure Wait(Delay: Cardinal);
-
-    function RDTSC: int64;
-    asm
-        DB      $0F, $31
-    end;
-
-  var
-    x1, x2: int64;
-  begin
-    x1 := RDTSC;
-    repeat
-      x2 := RDTSC;
-    until x2 >= (cpuspd * Delay + x1);
-  end;
-
 label
   exit;
 begin
@@ -283,7 +247,7 @@ begin
         Vfin := 1000000 / Fin;
         pause := init;
         step := 0;
-        wait(1000000);
+        WaitMicroseconds(1000000);
 
         repeat
           Inc(j);
@@ -291,7 +255,7 @@ begin
             j := 0;
           Inc(step);
           io.PortWriteByte($378, (ArrPhase[j] + HighVoltage));
-          Wait(pause);
+          WaitMicroseconds(pause);
           V := V + ((Vfin - Vinit)) / starting;
           pause := round(1000000 / V);
         until step = starting;
@@ -314,7 +278,7 @@ begin
           io.PortWriteByte($378, (ArrPhase[j] + HighVoltage));
           V := V + ((Vfin - Vinit)) / starting;
           pause := round(1000000 / V);
-          Wait(pause);
+          WaitMicroseconds(pause);
         until step = starting;
       end;
   end;
@@ -330,21 +294,12 @@ var
   V, Vinit, Vfin: real;
   PriorityClass: Integer;
   Priority: Integer;
+  Aborted: Boolean;
 
-  procedure Wait(Delay: Cardinal);
-
-    function RDTSC: int64;
-    asm
-        DB      $0F, $31
-    end;
-
-  var
-    x1, x2: int64;
+  function EscPressed: Boolean;
   begin
-    x1 := RDTSC;
-    repeat
-      x2 := RDTSC;
-    until x2 >= (cpuspd * Delay + x1);
+    Result := (step mod 100 = 0) and
+              (GetAsyncKeyState(VK_ESCAPE) and $8000 <> 0);
   end;
 
 label
@@ -359,6 +314,7 @@ begin
 
   application.ProcessMessages;
 
+  Aborted := False;
   Vinit := 1000000 / init;
   V := Vinit;
   Vfin := 1000000 / Speed;
@@ -378,7 +334,8 @@ begin
       j := 0;
     Inc(step);
     io.PortWriteByte($378, (ArrPhase[j] + HighVoltage));
-    Wait(pause);
+    WaitMicroseconds(pause);
+    if EscPressed then begin Aborted := True; goto exit; end;
     V := V + ((Vfin - Vinit)) / starting;
     pause := round(1000000 / V);
   until step = starting;
@@ -389,8 +346,8 @@ begin
       j := 0;
     Inc(step);
     io.PortWriteByte($378, (ArrPhase[j] + HighVoltage));
-    Wait(Speed);
-
+    WaitMicroseconds(Speed);
+    if EscPressed then begin Aborted := True; goto exit; end;
   until step >= (steps - starting);
 
   Vinit := 1000000 / Speed;
@@ -405,7 +362,8 @@ begin
     io.PortWriteByte($378, (ArrPhase[j] + HighVoltage));
     V := V + ((Vfin - Vinit)) / starting;
     pause := round(1000000 / V);
-    Wait(pause);
+    WaitMicroseconds(pause);
+    if EscPressed then begin Aborted := True; goto exit; end;
   until step = steps;
   goto exit;
 
@@ -416,14 +374,15 @@ small:
       j := 0;
     Inc(step);
     io.PortWriteByte($378, (ArrPhase[j] + HighVoltage));
-    Wait(20000);
+    WaitMicroseconds(20000);
+    if EscPressed then begin Aborted := True; goto exit; end;
   until step = steps;
 
 exit:
   SetThreadPriority(GetCurrentThread, Priority);
   SetPriorityClass(GetCurrentProcess, PriorityClass);
   messdlgs.CloseStatus;
-  Inc(CurrentStep, steps);
+  Inc(CurrentStep, step);
   xygraph.xygetbuffer(1);
   main.paintengine;
 
@@ -435,23 +394,14 @@ var
   V, Vinit, Vfin: real;
   PriorityClass: Integer;
   Priority: Integer;
+  Aborted: Boolean;
 label
   exit, small;
 
-  procedure Wait(Delay: Cardinal);
-
-    function RDTSC: int64;
-    asm
-        DB      $0F, $31
-    end;
-
-  var
-    x1, x2: int64;
+  function EscPressed: Boolean;
   begin
-    x1 := RDTSC;
-    repeat
-      x2 := RDTSC;
-    until x2 >= (cpuspd * Delay + x1);
+    Result := (step mod 100 = 0) and
+              (GetAsyncKeyState(VK_ESCAPE) and $8000 <> 0);
   end;
 
 begin
@@ -465,6 +415,7 @@ begin
 
   application.ProcessMessages;
 
+  Aborted := False;
   Vinit := 1000000 / init;
   V := Vinit;
   Vfin := 1000000 / Speed;
@@ -484,7 +435,8 @@ begin
       j := 3;
     Inc(step);
     io.PortWriteByte($378, (ArrPhase[j] + HighVoltage));
-    Wait(pause);
+    WaitMicroseconds(pause);
+    if EscPressed then begin Aborted := True; goto exit; end;
     V := V + ((Vfin - Vinit)) / starting;
     pause := round(1000000 / V);
   until step = starting;
@@ -495,8 +447,8 @@ begin
       j := 3;
     Inc(step);
     io.PortWriteByte($378, (ArrPhase[j] + HighVoltage));
-    Wait(Speed);
-
+    WaitMicroseconds(Speed);
+    if EscPressed then begin Aborted := True; goto exit; end;
   until step >= (Steps - starting);
 
   Vinit := 1000000 / Speed;
@@ -511,7 +463,8 @@ begin
     io.PortWriteByte($378, (ArrPhase[j] + HighVoltage));
     V := V + ((Vfin - Vinit)) / starting;
     pause := round(1000000 / V);
-    Wait(pause);
+    WaitMicroseconds(pause);
+    if EscPressed then begin Aborted := True; goto exit; end;
   until step = Steps;
   goto exit;
 
@@ -522,7 +475,8 @@ small:
       j := 3;
     Inc(step);
     io.PortWriteByte($378, (ArrPhase[j] + HighVoltage));
-    Wait(20000);
+    WaitMicroseconds(20000);
+    if EscPressed then begin Aborted := True; goto exit; end;
   until step = Steps;
 
 Exit:
@@ -530,7 +484,7 @@ Exit:
   SetThreadPriority(GetCurrentThread, Priority);
   SetPriorityClass(GetCurrentProcess, PriorityClass);
 
-  Dec(CurrentStep, Steps);
+  Dec(CurrentStep, step);
   messdlgs.CloseStatus;
   xygraph.xygetbuffer(1);
   main.paintengine;
@@ -541,18 +495,11 @@ Exit:
 end;
 
 procedure Cymomentr;
-
-  function RDTSC: int64;
-  asm
-        DB      $0F, $31
-  end;
-
 var
   PriorityClass: Integer;
   Priority: Integer;
   count: word;
   count1, count2: byte;
-  x1, x2: int64;
   key: byte;
 label
   exit;
@@ -569,60 +516,28 @@ begin
   repeat
 
     io.PortWriteByte($37A, $25);
-
-    x1 := rdtsc;
-    repeat
-      x2 := rdtsc
-    until x2 >= (2000 + x1);
+    WaitMicroseconds(1);
 
     io.PortWriteByte($37A, $0C);
-
-    x1 := rdtsc;
-    repeat
-      x2 := rdtsc
-    until x2 >= (2000 + x1);
+    WaitMicroseconds(1);
 
     io.PortWriteByte($378, 80 + HighVoltage);
-
-    x1 := rdtsc;
-    repeat
-      x2 := rdtsc
-    until x2 >= (cpuspd * 1000000 + x1);
+    WaitMicroseconds(1000000);
 
     io.PortWriteByte($37A, $2F);
-
-    x1 := rdtsc;
-    repeat
-      x2 := rdtsc
-    until x2 >= (2000 + x1);
+    WaitMicroseconds(1);
 
     io.PortWriteByte($37A, $2D);
-
-    x1 := rdtsc;
-    repeat
-      x2 := rdtsc
-    until x2 >= (2000 + x1);
+    WaitMicroseconds(1);
 
     io.PortWriteByte($37A, $2B);
-
-    x1 := rdtsc;
-    repeat
-      x2 := rdtsc
-    until x2 >= (2000 + x1);
+    WaitMicroseconds(1);
 
     count1 := io.PortReadByte($378);
-
-    x1 := rdtsc;
-    repeat
-      x2 := rdtsc
-    until x2 >= (2000 + x1);
+    WaitMicroseconds(1);
 
     io.PortWriteByte($37A, $29);
-
-    x1 := rdtsc;
-    repeat
-      x2 := rdtsc
-    until x2 >= (2000 + x1);
+    WaitMicroseconds(1);
 
     count2 := io.PortReadByte($378);
     count := Word(count2) shl 8 + Word(count1);
@@ -650,40 +565,23 @@ function IsSpectEnabled: boolean;
 var
   count1, count2: byte;
   count: word;
-  x1, x2: int64;
 begin
 
   io.PortWriteByte($37a, $25);
   io.PortWriteByte($37a, $2f);
+  WaitMicroseconds(1);
 
-  x1 := RDTSC;
-  repeat
-    x2 := RDTSC
-  until x2 >= (cpuspd + x1);
   io.PortWriteByte($37a, $2d);
-  x1 := RDTSC;
-  repeat
-    x2 := RDTSC
-  until x2 >= (cpuspd + x1);
+  WaitMicroseconds(1);
+
   io.PortWriteByte($37a, $2b);
-  x1 := RDTSC;
-  repeat
-    x2 := RDTSC
-  until x2 >= (cpuspd + x1);
+  WaitMicroseconds(1);
 
   count1 := io.PortReadByte($378);
-
-  x1 := RDTSC;
-  repeat
-    x2 := RDTSC
-  until x2 >= (cpuspd + x1);
+  WaitMicroseconds(1);
 
   io.PortWriteByte($37A, $29);
-
-  x1 := RDTSC;
-  repeat
-    x2 := RDTSC
-  until x2 >= (cpuspd + x1);
+  WaitMicroseconds(1);
 
   count2 := io.PortReadByte($378);
   count := Word(count2) shl 8 + Word(count1);
@@ -696,5 +594,8 @@ begin
     result := false;
 
 end;
+
+initialization
+  QueryPerformanceFrequency(QPCFreq);
 
 end.

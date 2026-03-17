@@ -1,4 +1,4 @@
-﻿unit measuring;
+unit measuring;
 
 interface
 
@@ -11,7 +11,6 @@ type
   private
     _towards, _inetrval, _spm, _stepmes: cardinal;
     _spectrum: TSpectrum;
-    _cpuspd: int64;
     _actLine: real;
     function GetSpectrum: TSpectrum;
   public
@@ -23,7 +22,6 @@ type
   TMesThreadREW = class(TThread)
   private
     _towards, _interval, _spm, _stepmes: cardinal;
-    _cpuspd: int64;
     _spectrum: TSpectrum;
     _actLine: Real;
     function GetSpectrum: TSpectrum;
@@ -36,7 +34,6 @@ type
   TMesThreadTIME = class(TThread)
   private
     _allTime, _currentTime, _discrTime: cardinal;
-    _cpuspd: int64;
     _spectrum: TSpectrum;
     function GetSpectrum: TSpectrum;
   public
@@ -55,26 +52,17 @@ implementation
 uses
   mainform, dfscontrol, parametres;
 
-	{$REGION 'Reverse scanning'}
-
 constructor TMesThreadREW.Create(spectrum: TSpectrum; towards, spm, interval: cardinal; actLine: Real);
 begin
   _towards := towards;
   _interval := interval;
   _spm := spm;
-  _cpuspd := cpuspd;
   _spectrum := spectrum;
   Self._actLine := actLine;
   inherited create(True);
 end;
 
 procedure TMesThreadREW.Execute;
-
-  function RDTSC: int64;
-  asm
-        db      $0F, $31
-  end;
-
 var
   PriorityClass: Integer;
   Priority: Integer;
@@ -82,11 +70,8 @@ var
   point: TPointR;
   count: word;
   count1, count2: byte;
-  x1, x2: int64;
   key: byte;
   ph: byte;
-label
-  exit;
 begin
 
   PriorityClass := GetPriorityClass(GetCurrentProcess);
@@ -103,11 +88,7 @@ begin
   repeat
 
     io.PortWriteByte($37A, $25);
-
-    x1 := rdtsc;
-    repeat
-      x2 := rdtsc
-    until x2 >= (_cpuspd + x1);
+    WaitMicroseconds(1);
 
     io.PortWriteByte($37A, $0C);
 
@@ -120,50 +101,26 @@ begin
       ph := ArrPhase[j];
 
       io.PortWriteByte($378, ph + HighVoltage);
-
-      x1 := rdtsc;
-      repeat
-        x2 := rdtsc
-      until x2 >= (_cpuspd * _interval + x1);
+      WaitMicroseconds(_interval);
 
       inc(s);
 
     until s = _spm;
 
     io.PortWriteByte($37A, $2F);
-
-    x1 := rdtsc;
-    repeat
-      x2 := rdtsc
-    until x2 >= (_cpuspd + x1);
+    WaitMicroseconds(1);
 
     io.PortWriteByte($37A, $2D);
-
-    x1 := rdtsc;
-    repeat
-      x2 := rdtsc
-    until x2 >= (_cpuspd + x1);
+    WaitMicroseconds(1);
 
     io.PortWriteByte($37A, $2B);
-
-    x1 := rdtsc;
-    repeat
-      x2 := rdtsc
-    until x2 >= (_cpuspd + x1);
+    WaitMicroseconds(1);
 
     count1 := io.PortReadByte($378);
-
-    x1 := rdtsc;
-    repeat
-      x2 := rdtsc
-    until x2 >= (_cpuspd + x1);
+    WaitMicroseconds(1);
 
     io.PortWriteByte($37A, $29);
-
-    x1 := rdtsc;
-    repeat
-      x2 := rdtsc
-    until x2 >= (_cpuspd + x1);
+    WaitMicroseconds(1);
 
     count2 := io.PortReadByte($378);
     count := Word(count2) shl 8 + Word(count1);
@@ -174,8 +131,6 @@ begin
       key := 0;
 
     Inc(_stepmes, s);
-
-    x1 := rdtsc;
 
     case _spectrum.ScaleX of
       sm:
@@ -208,7 +163,6 @@ begin
     _spectrum.Add(point, i);
 
     inc(i);
-    x2 := rdtsc;
 
     if key = 1 then
     begin
@@ -240,16 +194,12 @@ begin
   result := Self._spectrum;
 end;
 
-{$ENDREGION}
-
-	{$REGION 'Forward Scanning'}
 
 constructor TMesThreadFRW.Create(spectrum: TSpectrum; towards, spm, interval: cardinal; actLine: real);
 begin
   _towards := towards;
   _inetrval := interval;
   _spm := spm;
-  _cpuspd := cpuspd;
   _spectrum := spectrum;
   _actLine := actLine;
 
@@ -257,12 +207,6 @@ begin
 end;
 
 procedure TMesThreadFRW.Execute;
-
-  function RDTSC: int64;
-  asm
-        db      $0F, $31
-  end;
-
 var
   PriorityClass: Integer;
   Priority: Integer;
@@ -270,11 +214,8 @@ var
   count1, count2: byte;
   count: word;
   point: TpointR;
-  x1, x2: int64;
   key: byte;
   ph: byte;
-label
-  exit, loop;
 begin
 
   PriorityClass := GetPriorityClass(GetCurrentProcess);
@@ -292,11 +233,7 @@ begin
   repeat
 
     io.PortWriteByte($37A, $25);
-
-    x1 := rdtsc;
-    repeat
-      x2 := rdtsc
-    until x2 >= (_cpuspd + x1);
+    WaitMicroseconds(1);
 
     io.PortWriteByte($37A, $0C);
 
@@ -309,49 +246,25 @@ begin
       ph := ArrPhase[j];
 
       io.PortWriteByte($378, ph + HighVoltage);
-
-      x1 := rdtsc;
-      repeat
-        x2 := rdtsc
-      until x2 >= (_cpuspd * _inetrval + x1);
+      WaitMicroseconds(_inetrval);
 
       inc(s);
     until s = _spm;
 
     io.PortWriteByte($37A, $2F);
-
-    x1 := rdtsc;
-    repeat
-      x2 := rdtsc
-    until x2 >= (_cpuspd + x1);
+    WaitMicroseconds(1);
 
     io.PortWriteByte($37A, $2D);
-
-    x1 := rdtsc;
-    repeat
-      x2 := rdtsc
-    until x2 >= (_cpuspd + x1);
+    WaitMicroseconds(1);
 
     io.PortWriteByte($37A, $2B);
-
-    x1 := rdtsc;
-    repeat
-      x2 := rdtsc
-    until x2 >= (_cpuspd + x1);
+    WaitMicroseconds(1);
 
     count1 := io.PortReadByte($378);
-
-    x1 := rdtsc;
-    repeat
-      x2 := rdtsc
-    until x2 >= (_cpuspd + x1);
+    WaitMicroseconds(1);
 
     io.PortWriteByte($37A, $29);
-
-    x1 := rdtsc;
-    repeat
-      x2 := rdtsc
-    until x2 >= (_cpuspd + x1);
+    WaitMicroseconds(1);
 
     count2 := io.PortReadByte($378);
     count := Word(count2) shl 8 + Word(count1);
@@ -427,38 +340,25 @@ begin
   result := Self._spectrum;
 end;
 
-{$ENDREGION}
-
-	{$REGION 'Time Scanning'}
 
 constructor TMesThreadTIME.Create(spectrum: TSpectrum; discr, duration: cardinal);
 begin
   _discrTime := discr;
   _allTime := duration;
-  _cpuspd := cpuspd;
   _spectrum := spectrum;
   inherited create(True);
 
 end;
 
 procedure TMesThreadTIME.Execute;
-
-  function RDTSC: int64;
-  asm
-        db      $0F, $31
-  end;
-
 var
   PriorityClass: Integer;
   Priority: Integer;
   i: cardinal;
   count: word;
   count1, count2: byte;
-  x1, x2: int64;
   point: TPointR;
   key: byte;
-label
-  exit;
 begin
 
   PriorityClass := GetPriorityClass(GetCurrentProcess);
@@ -478,60 +378,28 @@ begin
   repeat
 
     io.PortWriteByte($37A, $25);
-
-    x1 := rdtsc;
-    repeat
-      x2 := rdtsc
-    until x2 >= (_cpuspd + x1);
+    WaitMicroseconds(1);
 
     io.PortWriteByte($37A, $0C);
-
-    x1 := rdtsc;
-    repeat
-      x2 := rdtsc
-    until x2 >= (_cpuspd + x1);
+    WaitMicroseconds(1);
 
     io.PortWriteByte($378, 80 + HighVoltage);
-
-    x1 := rdtsc;
-    repeat
-      x2 := rdtsc
-    until x2 >= (_cpuspd * _discrTime + x1);
+    WaitMicroseconds(_discrTime);
 
     io.PortWriteByte($37A, $2F);
-
-    x1 := rdtsc;
-    repeat
-      x2 := rdtsc
-    until x2 >= (_cpuspd + x1);
+    WaitMicroseconds(1);
 
     io.PortWriteByte($37A, $2D);
-
-    x1 := rdtsc;
-    repeat
-      x2 := rdtsc
-    until x2 >= (_cpuspd + x1);
+    WaitMicroseconds(1);
 
     io.PortWriteByte($37A, $2B);
-
-    x1 := rdtsc;
-    repeat
-      x2 := rdtsc
-    until x2 >= (_cpuspd + x1);
+    WaitMicroseconds(1);
 
     count1 := io.PortReadByte($378);
-
-    x1 := rdtsc;
-    repeat
-      x2 := rdtsc
-    until x2 >= (_cpuspd + x1);
+    WaitMicroseconds(1);
 
     io.PortWriteByte($37A, $29);
-
-    x1 := rdtsc;
-    repeat
-      x2 := rdtsc
-    until x2 >= (_cpuspd + x1);
+    WaitMicroseconds(1);
 
     count2 := io.PortReadByte($378);
     count := Word(count2) shl 8 + Word(count1);
@@ -587,7 +455,5 @@ function TMesThreadTIME.GetSpectrum: TSpectrum;
 begin
   result := Self._spectrum;
 end;
-
-{$ENDREGION}
 
 end.

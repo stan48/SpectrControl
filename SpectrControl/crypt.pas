@@ -14,7 +14,6 @@ function StrToAscii(S: string): string;
 
 function ASCIIToStr(AsciiString: string): string;
 
-// обязательно смените ключи до использования
 const
   StartKey = 471; // Start default key
   MultKey = 62142; // Mult default key
