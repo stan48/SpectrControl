@@ -1,4 +1,4 @@
-unit dfscontrol;
+﻿unit dfscontrol;
 
 interface
 
@@ -32,7 +32,6 @@ var
   QPCFreq: Int64;
 
 // Пауза в микросекундах на основе QueryPerformanceCounter.
-// Заменяет все RDTSC-based busy-wait.
 procedure WaitMicroseconds(Microseconds: Cardinal);
 var
   Start, Now: Int64;
