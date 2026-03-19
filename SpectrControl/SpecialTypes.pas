@@ -1,4 +1,4 @@
-unit SpecialTypes;
+﻿unit SpecialTypes;
 
 interface
 

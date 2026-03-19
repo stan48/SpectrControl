@@ -4,10 +4,10 @@ object frmAbout: TfrmAbout
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = #1054' '#1087#1088#1086#1075#1088#1072#1084#1084#1077
-  ClientHeight = 275
-  ClientWidth = 426
+  ClientHeight = 296
+  ClientWidth = 459
   Color = 15132390
-  Font.Charset = DEFAULT_CHARSET
+  Font.Charset = RUSSIAN_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
@@ -97,41 +97,41 @@ object frmAbout: TfrmAbout
   Position = poScreenCenter
   OnShow = FormShow
   PixelsPerInch = 96
-  TextHeight = 13
+  TextHeight = 14
   object Label1: TLabel
-    Left = 88
-    Top = 19
-    Width = 294
-    Height = 20
+    Left = 95
+    Top = 20
+    Width = 287
+    Height = 19
     Caption = #1044#1060#1057'-52: '#1059#1087#1088#1072#1074#1083#1103#1102#1097#1072#1103' '#1087#1088#1086#1075#1088#1072#1084#1084#1072
-    Font.Charset = DEFAULT_CHARSET
+    Font.Charset = RUSSIAN_CHARSET
     Font.Color = clDefault
-    Font.Height = -16
+    Font.Height = -17
     Font.Name = 'MS Sans Serif'
     Font.Style = [fsBold]
     ParentFont = False
   end
   object lblAppVersion: TLabel
-    Left = 88
-    Top = 40
-    Width = 77
-    Height = 16
+    Left = 95
+    Top = 43
+    Width = 86
+    Height = 17
     Caption = #1042#1077#1088#1089#1080#1103' 2.5.6'
-    Font.Charset = DEFAULT_CHARSET
+    Font.Charset = RUSSIAN_CHARSET
     Font.Color = clWindowText
-    Font.Height = -13
+    Font.Height = -15
     Font.Name = 'MS Sans Serif'
     Font.Style = []
     ParentFont = False
   end
   object Label4: TLabel
-    Left = 40
-    Top = 202
-    Width = 357
-    Height = 13
+    Left = 59
+    Top = 217
+    Width = 345
+    Height = 15
     Alignment = taCenter
     Caption = #1043#1088#1086#1076#1085#1077#1085#1089#1082#1080#1081' '#1075#1086#1089#1091#1076#1072#1088#1089#1090#1074#1077#1085#1085#1099#1081' '#1091#1085#1080#1074#1077#1088#1089#1080#1090#1077#1090' '#1080#1084'. '#1071'. '#1050#1091#1087#1072#1083#1099'.'
-    Font.Charset = DEFAULT_CHARSET
+    Font.Charset = RUSSIAN_CHARSET
     Font.Color = clWindowText
     Font.Height = -12
     Font.Name = 'MS Sans Serif'
@@ -140,8 +140,8 @@ object frmAbout: TfrmAbout
     WordWrap = True
   end
   object Image1: TImage
-    Left = 34
-    Top = 20
+    Left = 37
+    Top = 22
     Width = 32
     Height = 32
     AutoSize = True
@@ -219,26 +219,26 @@ object frmAbout: TfrmAbout
       00000000}
   end
   object Label8: TLabel
-    Left = 16
-    Top = 240
-    Width = 196
-    Height = 13
+    Left = 17
+    Top = 258
+    Width = 198
+    Height = 14
     Caption = '('#1089') '#1043#1077#1088#1084#1072#1085' '#1040#1085#1076#1088#1077#1081', '#1056#1099#1078#1082#1086' '#1050#1086#1085#1089#1090#1072#1085#1090#1080#1085
   end
   object Label3: TLabel
-    Left = 343
-    Top = 240
-    Width = 66
-    Height = 13
+    Left = 369
+    Top = 258
+    Width = 65
+    Height = 14
     Caption = #1043#1088#1086#1076#1085#1086', 2007'
   end
   object Label9: TLabel
-    Left = 40
-    Top = 221
-    Width = 348
-    Height = 13
+    Left = 59
+    Top = 238
+    Width = 334
+    Height = 15
     Caption = #1051#1072#1073#1086#1088#1072#1090#1086#1088#1080#1103' '#1072#1074#1090#1086#1084#1072#1090#1080#1079#1072#1094#1080#1080' '#1092#1080#1079#1080#1095#1077#1089#1082#1086#1075#1086' '#1101#1082#1089#1087#1077#1088#1080#1084#1077#1085#1090#1072'.'
-    Font.Charset = DEFAULT_CHARSET
+    Font.Charset = RUSSIAN_CHARSET
     Font.Color = clWindowText
     Font.Height = -12
     Font.Name = 'MS Sans Serif'
@@ -246,54 +246,68 @@ object frmAbout: TfrmAbout
     ParentFont = False
   end
   object GroupBox1: TGroupBox
-    Left = 16
-    Top = 72
-    Width = 393
-    Height = 124
+    Left = 17
+    Top = 78
+    Width = 423
+    Height = 133
     TabOrder = 0
     object Label5: TLabel
-      Left = 16
-      Top = 16
-      Width = 123
-      Height = 13
+      Left = 17
+      Top = 17
+      Width = 124
+      Height = 14
       Caption = #1054#1087#1077#1088#1072#1094#1080#1086#1085#1085#1072#1103' '#1089#1080#1089#1090#1077#1084#1072':'
     end
     object Label6: TLabel
-      Left = 16
-      Top = 64
-      Width = 25
-      Height = 13
+      Left = 17
+      Top = 69
+      Width = 23
+      Height = 14
       Caption = 'CPU:'
     end
     object lblOs: TLabel
-      Left = 144
-      Top = 16
-      Width = 241
-      Height = 17
+      Left = 155
+      Top = 17
+      Width = 260
+      Height = 19
       AutoSize = False
       Caption = 'os'
       WordWrap = True
     end
     object lblMem: TLabel
-      Left = 184
-      Top = 40
+      Left = 198
+      Top = 43
       Width = 22
-      Height = 13
+      Height = 14
       Caption = 'mem'
     end
     object Label7: TLabel
-      Left = 16
-      Top = 40
-      Width = 162
-      Height = 13
+      Left = 17
+      Top = 43
+      Width = 163
+      Height = 14
       Caption = #1044#1086#1089#1090#1091#1087#1085#1072#1103' '#1092#1080#1079#1080#1095#1077#1089#1082#1072#1103' '#1087#1072#1084#1103#1090#1100':'
     end
     object lblCpu: TLabel
-      Left = 48
-      Top = 64
+      Left = 52
+      Top = 69
       Width = 27
-      Height = 13
+      Height = 14
       Caption = 'lbCpu'
+    end
+    object Label10: TLabel
+      Left = 17
+      Top = 95
+      Width = 46
+      Height = 14
+      Caption = 'InpOut32:'
+    end
+    object lblInpOut: TLabel
+      Left = 78
+      Top = 95
+      Width = 41
+      Height = 14
+      Caption = 'lblInpOut'
     end
   end
 end

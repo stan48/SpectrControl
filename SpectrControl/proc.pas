@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, XiButton, messdlgs, Math, SpecialTypes;
+  Dialogs, StdCtrls, XiButton, messdlgs, Math, SpecialTypes, FloatUtils;
 
 type
   TRealArray = array of Double;
@@ -85,7 +85,7 @@ var
 begin
 
   try
-    coef2 := round(strtofloat(proc.fmProc.efu.text));
+    coef2 := round(StrToFloatSafe(proc.fmProc.efu.text));
   except
     on EConvertError do
     begin

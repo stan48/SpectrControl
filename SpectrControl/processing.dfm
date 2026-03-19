@@ -1,11 +1,11 @@
-object proc: Tproc
+object proc: TProc
   Left = 132
   Top = 48
   Width = 812
   Height = 614
   Caption = #1057#1087#1077#1082#1090#1088#1086#1084#1077#1090#1088' '#1044#1060#1057'-52 ['#1054#1073#1088#1072#1073#1086#1090#1082#1072' '#1088#1077#1079#1091#1083#1100#1090#1072#1090#1086#1074']'
   Color = 15396589
-  Font.Charset = DEFAULT_CHARSET
+  Font.Charset = RUSSIAN_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
   Font.Name = 'MS Sans Serif'

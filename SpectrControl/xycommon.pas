@@ -1,4 +1,4 @@
-unit xycommon;
+﻿unit xycommon;
 
 {=========================================================================}
 { See Copyright notes at XYGRAPH.                                         }

@@ -1,4 +1,4 @@
-    //*** Italian TEMPLATE
+﻿    //*** Italian TEMPLATE
   sCancelCaptionI = 'Annulla';
   CaptionsI: array[TMsgDlgType] of string = ('Attenzione', 'Errore',
     'Informazione', 'Conferma', '');

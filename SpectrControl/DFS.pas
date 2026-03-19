@@ -1,11 +1,11 @@
-unit DFS;
+п»їunit DFS;
 
 interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, Buttons, ImgList, messdlgs,
-  XiButton, ExtCtrls;
+  XiButton, ExtCtrls, FloatUtils;
 
 type
   TDFS52 = class(TForm)
@@ -63,7 +63,7 @@ end;
 
 procedure TDFS52.xbCalobrClick(Sender: TObject);
 begin
-  if messdlgs.MessageDlg('Выполнить калибровку?', mtConfirmation, [mbYes, mbNo], 0) = 6 then
+  if messdlgs.MessageDlg('Р’С‹РїРѕР»РЅРёС‚СЊ РєР°Р»РёР±СЂРѕРІРєСѓ?', mtConfirmation, [mbYes, mbNo], 0) = 6 then
   begin
     dfs52.Close;
     mainform.Main.mbox.Repaint;
@@ -74,9 +74,9 @@ end;
 procedure TDFS52.xbStartClick(Sender: TObject);
 begin
   if rbFRW.Checked then
-    dfscontrol.RewindFRW(round(strtofloat(erew.Text)), strtoint(espeed.Text));
+    dfscontrol.RewindFRW(round(StrToFloatSafe(erew.Text)), strtoint(espeed.Text));
   if rbREW.Checked then
-    dfscontrol.RewindREW(round(strtofloat(erew.Text)), strtoint(espeed.Text));
+    dfscontrol.RewindREW(round(StrToFloatSafe(erew.Text)), strtoint(espeed.Text));
 end;
 
 end.

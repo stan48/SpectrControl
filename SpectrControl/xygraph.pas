@@ -1,4 +1,4 @@
-unit xygraph; // version 2.3
+﻿unit xygraph; // version 2.3
 
 {===== revised copyright notice 2005 =====================================}
 {                                                                         }

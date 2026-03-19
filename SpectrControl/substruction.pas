@@ -1,4 +1,4 @@
-unit substruction;
+п»їunit substruction;
 
 interface
 
@@ -62,20 +62,20 @@ end;
 
 procedure TSubstruction.Sort();
 var
-  k: Integer; // текущий элемент массива
-  i: integer; // индекс для ввода и вывода массива
-  changed: boolean; // TRUE, если в текущем цикле были обмены
-  buf: TPointR; // буфер для обмена элементами массива
+  k: Integer; // С‚РµРєСѓС‰РёР№ СЌР»РµРјРµРЅС‚ РјР°СЃСЃРёРІР°
+  i: integer; // РёРЅРґРµРєСЃ РґР»СЏ РІРІРѕРґР° Рё РІС‹РІРѕРґР° РјР°СЃСЃРёРІР°
+  changed: boolean; // TRUE, РµСЃР»Рё РІ С‚РµРєСѓС‰РµРј С†РёРєР»Рµ Р±С‹Р»Рё РѕР±РјРµРЅС‹
+  buf: TPointR; // Р±СѓС„РµСЂ РґР»СЏ РѕР±РјРµРЅР° СЌР»РµРјРµРЅС‚Р°РјРё РјР°СЃСЃРёРІР°
 begin
 
   if Self.Count = 1 then
     Exit;
 
   repeat
-    changed := False; // пусть в текущем цикле нет обменов
+    changed := False; // РїСѓСЃС‚СЊ РІ С‚РµРєСѓС‰РµРј С†РёРєР»Рµ РЅРµС‚ РѕР±РјРµРЅРѕРІ
     for k := 0 to Self.Count - 2 do
       if (Self[k].Point.X > Self[k + 1].Point.X) then
-      begin // обменяем k-й и k+1-й элементы
+      begin // РѕР±РјРµРЅСЏРµРј k-Р№ Рё k+1-Р№ СЌР»РµРјРµРЅС‚С‹
         buf := Self[k].Point;
         Self[k].Point := Self[k + 1].Point;
         Self[k + 1].Point := buf;

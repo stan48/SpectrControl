@@ -1,4 +1,4 @@
-unit Spectrum;
+ï»¿unit Spectrum;
 
 interface
 
@@ -136,7 +136,7 @@ begin
   Self.Peaks.Clear;
   if Self.Count < t * 2 then
   begin
-    MessDlgs.ShowError('Â ñïåêòðå ñëèøêîì ìàëî òî÷åê äëÿ ïîèñêà ñ çàäàííûìè ïàðàìåòðàìè!');
+    MessDlgs.ShowError('Ð’ ÑÐ¿ÐµÐºÑ‚Ñ€Ðµ ÑÐ»Ð¸ÑˆÐºÐ¾Ð¼ Ð¼Ð°Ð»Ð¾ Ñ‚Ð¾Ñ‡ÐµÐº Ð´Ð»Ñ Ð¿Ð¾Ð¸ÑÐºÐ° Ñ Ð·Ð°Ð´Ð°Ð½Ð½Ñ‹Ð¼Ð¸ Ð¿Ð°Ñ€Ð°Ð¼ÐµÑ‚Ñ€Ð°Ð¼Ð¸!');
     Exit;
   end;
 

@@ -1,10 +1,10 @@
-unit peaksForm;
+Ôªøunit peaksForm;
 
 interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, XiButton, MAINFORM;
+  Dialogs, StdCtrls, XiButton, mainform;
 
 type
   TPeaksForm = class(TForm)
@@ -59,7 +59,7 @@ begin
   except
     on EConvertError do
     begin
-      ShowMessage('Œ¯Ë·Í‡!');
+      ShowMessage('–û—à–∏–±–∫–∞!');
       Exit;
     end;
   end;

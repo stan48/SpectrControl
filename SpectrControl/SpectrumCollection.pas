@@ -1,4 +1,4 @@
-unit SpectrumCollection;
+﻿unit SpectrumCollection;
 
 interface
 

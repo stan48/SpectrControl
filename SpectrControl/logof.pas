@@ -1,4 +1,4 @@
-unit logof;
+﻿unit logof;
 
 interface
 

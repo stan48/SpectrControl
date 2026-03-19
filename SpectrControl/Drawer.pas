@@ -3,7 +3,7 @@
 interface
 
 uses
-  SysUtils, Classes, Controls, ExtCtrls, XYGraph, SpectrumCollection,
+  SysUtils, Classes, Controls, ExtCtrls, XYGraph, xycommon, SpectrumCollection,
   Spectrum, Graphics, substruction, specialtypes, peak;
 
 type
@@ -41,6 +41,7 @@ type
     constructor Create(box: TPaintBox; list: TSpectrumCollection);
 
     procedure Refresh;
+    procedure PaintNow;
     procedure Draw(x, y: real);
     procedure UnZoom;
     function MouseDown(Button: TMouseButton; Shift: TShiftState; X, Y: Integer): TPointR;
@@ -117,9 +118,13 @@ end;
 
 procedure TDrawer.Paint;
 
-  procedure BuildArea;
+  procedure BuildArea(bmp: TBitmap);
   begin
-    xygraph.xycleargraph(_box, $00E6E6E6, $00E6E6E6, 1);
+    // рисуем на offscreen bitmap через xycanvasgraph вместо xycleargraph
+    xygraph.xycanvasgraph(bmp.Canvas, bmp.Width, bmp.Height, $00E6E6E6, $00E6E6E6, 1, true);
+    // восстанавливаем ссылку на paintbox для mouse-интеракции (ruler, zoom)
+    xycommon.xypaintbox := _box;
+    xycommon.cvmode := false;
     xygraph.xysetgridlines(5, -1, 5, -1);
     xygraph.xystartgraph(0, 100, 0, 100, 53, 20, 25, 34, clipon);
     xygraph.xyxaxis(clBlack, _minx, _maxx, (_maxx / 400), 0, _xname, gridon, lin, fixed);
@@ -136,74 +141,100 @@ var
   pk: TPeak;
   t: TCollectionItem;
   xlen, ylen: Real;
+  bmp: TBitmap;
 begin
-
-  BuildArea;
-
-  if (_points <> nil) and (_points.Count > 0) then
-  begin
-    xygraph.xypen.Color := clRed;
-    point := _points[0].point;
-    XYGraph.xymove(point.X, point.Y);
-    for i := 0 to _points.Count - 1 do
-    begin
-      point := _points[i].point;
-      XYGraph.xydraw(point.X, point.Y);
-      XYGraph.xysymbol(1, 6, 2);
-    end;
-
-  end;
-
-  XYGraph.xyfinish;
-
-  if Self._list = nil then
+  if (_box = nil) or (_box.Width <= 0) or (_box.Height <= 0) then
     exit;
 
-  if _list.Count > 0 then
-  begin
-    for i := 0 to _list.Count - 1 do
-    begin
-      spectrum := _list[i];
-      if spectrum.Visible = false then
-        Continue;
-      if spectrum.Count = 0 then
-        Continue;
+  // создаём offscreen bitmap - всё рисование идёт через него
+  bmp := TBitmap.Create;
+  try
+    bmp.Width := _box.Width;
+    bmp.Height := _box.Height;
 
-      if spectrum.Peaks.Count > 0 then
+    BuildArea(bmp);
+
+    if (_points <> nil) and (_points.Count > 0) then
+    begin
+      xygraph.xypen.Color := clRed;
+      point := _points[0].point;
+      XYGraph.xymove(point.X, point.Y);
+      for i := 0 to _points.Count - 1 do
       begin
-        for t in spectrum.Peaks do
+        point := _points[i].point;
+        XYGraph.xydraw(point.X, point.Y);
+        XYGraph.xysymbol(1, 6, 2);
+      end;
+
+    end;
+
+    XYGraph.xyfinish;
+
+    if (Self._list <> nil) and (_list.Count > 0) then
+    begin
+      for i := 0 to _list.Count - 1 do
+      begin
+        spectrum := _list[i];
+        if spectrum.Visible = false then
+          Continue;
+        if spectrum.Count = 0 then
+          Continue;
+
+        if spectrum.Peaks.Count > 0 then
         begin
-          pk := TPeak(t);
-          point := pk.Point;
-          ylen := (Self._maxy - Self._miny) / 20;
-          xlen := (Self._maxx - Self._minx) / 200;
-          point.Y := point.Y + ylen / 10;
-          xypen.Color := spectrum.Color;
-          xygraph.xymove(point.X, ylen + point.Y);
-          xygraph.xydraw(point.X, point.Y);
-          xygraph.xydraw(point.X - xlen, point.Y + ylen / 3);
-          xygraph.xydraw(point.X, point.Y);
-          xygraph.xydraw(point.X + xlen, point.Y + ylen / 3);
-          xygraph.xytext(spectrum.Color, Format('%.2f', [point.Y]), point.x + xlen / 2, point.Y + ylen, 1, 1, 1);
+          for t in spectrum.Peaks do
+          begin
+            pk := TPeak(t);
+            point := pk.Point;
+            ylen := (Self._maxy - Self._miny) / 20;
+            xlen := (Self._maxx - Self._minx) / 200;
+            point.Y := point.Y + ylen / 10;
+            xypen.Color := spectrum.Color;
+            xygraph.xymove(point.X, ylen + point.Y);
+            xygraph.xydraw(point.X, point.Y);
+            xygraph.xydraw(point.X - xlen, point.Y + ylen / 3);
+            xygraph.xydraw(point.X, point.Y);
+            xygraph.xydraw(point.X + xlen, point.Y + ylen / 3);
+            xygraph.xytext(spectrum.Color, Format('%.2f', [point.Y]), point.x + xlen / 2, point.Y + ylen, 1, 1, 1);
+          end;
+
         end;
 
-      end;
+        point := spectrum.GetItem(0);
+        xygraph.xymove(point.X, point.Y);
+        xygraph.xypen.Color := spectrum.Color;
 
-      point := spectrum.GetItem(0);
-      xygraph.xymove(point.X, point.Y);
-      xygraph.xypen.Color := spectrum.Color;
-
-      for j := 0 to spectrum.Count - 1 do
-      begin
-        point := spectrum.GetItem(j);
-        xygraph.xydraw(point.X, point.Y);
+        for j := 0 to spectrum.Count - 1 do
+        begin
+          point := spectrum.GetItem(j);
+          xygraph.xydraw(point.X, point.Y);
+        end;
       end;
     end;
+
+    // одним вызовом копируем готовое изображение на экран
+    _box.Canvas.Draw(0, 0, bmp);
+
+    // восстанавливаем xycanvas на paintbox canvas до освобождения bitmap,
+    // иначе mouse-операции (zoom, ruler) обратятся к уничтоженному canvas
+    xycommon.xycanvas := _box.Canvas;
+    xygraph.xypen := xycommon.xycanvas.pen;
+    xygraph.xybrush := xycommon.xycanvas.brush;
+    xygraph.xyfont := xycommon.xycanvas.font;
+
+  finally
+    bmp.Free;
   end;
 
 end;
 
 procedure TDrawer.Refresh;
+begin
+  if _box <> nil then
+    _box.Invalidate;  // ставит в очередь WM_PAINT, Paint вызовется один раз из OnPaint
+end;
+
+procedure TDrawer.PaintNow;
 begin
   Self.Paint;
 end;

@@ -6,7 +6,7 @@ object timeform: Ttimeform
   ClientHeight = 72
   ClientWidth = 294
   Color = 15132390
-  Font.Charset = DEFAULT_CHARSET
+  Font.Charset = RUSSIAN_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
   Font.Name = 'MS Sans Serif'

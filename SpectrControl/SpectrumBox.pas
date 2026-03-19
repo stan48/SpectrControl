@@ -1,4 +1,4 @@
-unit SpectrumBox;
+п»їunit SpectrumBox;
 
 interface
 
@@ -108,7 +108,7 @@ end;
 //    exmax.Text:='100';
 //    eymin.Text:='0';
 //    eymax.Text:='1000';
-//    messdlgs.ShowError('Параметры графика заданы неверно.');
+//    messdlgs.ShowError('РџР°СЂР°РјРµС‚СЂС‹ РіСЂР°С„РёРєР° Р·Р°РґР°РЅС‹ РЅРµРІРµСЂРЅРѕ.');
 //    result:=false;
 //    system.Exit; end;
 //end;
@@ -118,7 +118,7 @@ end;
 //    exmax.Text:='100';
 //    eymin.Text:='0';
 //    eymax.Text:='1000';
-//    messdlgs.ShowError('Параметры графика заданы неверно.');
+//    messdlgs.ShowError('РџР°СЂР°РјРµС‚СЂС‹ РіСЂР°С„РёРєР° Р·Р°РґР°РЅС‹ РЅРµРІРµСЂРЅРѕ.');
 //    result:=false;
 //    system.Exit; end;
 //    
@@ -136,22 +136,22 @@ end;
 //begin
 
 //if ArrResult[0,0]=0 then begin
-//    if scaletype= 0 then name:='шаги';
-//    if scaletype= 1 then name:='обр.сант.';
-//    if scaletype= 2 then name:='нм';
-//    //if Hz=1 then HzN:='Гц' else HzN:='имп.';
+//    if scaletype= 0 then name:='С€Р°РіРё';
+//    if scaletype= 1 then name:='РѕР±СЂ.СЃР°РЅС‚.';
+//    if scaletype= 2 then name:='РЅРј';
+//    //if Hz=1 then HzN:='Р“С†' else HzN:='РёРјРї.';
   //  buildarea;
 //end;
 //
 //if ArrResult[0,0]=1 then begin
 //
-//    if ArrResult[0,1] = 0 then name:='шаги';
-//    if ArrResult[0,1] = 1 then name:='обр.сант.';
-//    if ArrResult[0,1] = 2 then name:='нм';
+//    if ArrResult[0,1] = 0 then name:='С€Р°РіРё';
+//    if ArrResult[0,1] = 1 then name:='РѕР±СЂ.СЃР°РЅС‚.';
+//    if ArrResult[0,1] = 2 then name:='РЅРј';
 //    if ArrResult[0,1] = 3 then name:='c';
 //
-//    if ArrResult[1,1] = 1 then HzN:='Гц';
-//    if ArrResult[1,1] = 0 then HzN:='имп';
+//    if ArrResult[1,1] = 1 then HzN:='Р“С†';
+//    if ArrResult[1,1] = 0 then HzN:='РёРјРї';
 //
 //    if BuildArea=true then begin
 //

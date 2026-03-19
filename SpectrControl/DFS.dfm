@@ -7,7 +7,7 @@ object DFS52: TDFS52
   ClientHeight = 183
   ClientWidth = 391
   Color = 15132390
-  Font.Charset = DEFAULT_CHARSET
+  Font.Charset = RUSSIAN_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
@@ -103,7 +103,6 @@ object DFS52: TDFS52
     Width = 79
     Height = 16
     Caption = #1042#1085#1080#1084#1072#1085#1080#1077'!'
-    Font.Charset = DEFAULT_CHARSET
     Font.Color = clRed
     Font.Height = -13
     Font.Name = 'MS Sans Serif'
@@ -119,7 +118,6 @@ object DFS52: TDFS52
     Caption = 
       #1042#1086' '#1080#1079#1073#1077#1078#1077#1085#1080#1077' '#1087#1086#1083#1086#1084#1082#1080' '#1091#1089#1090#1072#1085#1086#1074#1082#1080' '#1083#1102#1073#1099#1077' '#1085#1077#1089#1072#1085#1082#1094#1080#1086#1085#1080#1088#1086#1074#1072#1085#1085#1099#1077' '#1076#1077#1081#1089#1090#1074#1080 +
       #1103' '#1079#1072#1087#1088#1077#1097#1077#1085#1099'!'
-    Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -11
     Font.Name = 'MS Sans Serif'
@@ -282,7 +280,6 @@ object DFS52: TDFS52
       Gradient = True
       HotTrack = True
       Caption = #1050#1072#1083#1080#1073#1088#1086#1074#1072#1090#1100' '#1091#1089#1090#1072#1085#1086#1074#1082#1091
-      Font.Charset = DEFAULT_CHARSET
       Font.Color = clWhite
       Font.Height = -11
       Font.Name = 'MS Sans Serif'

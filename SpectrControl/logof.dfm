@@ -3,23 +3,23 @@ object logo: Tlogo
   Top = 233
   BorderStyle = bsNone
   Caption = 'logo'
-  ClientHeight = 254
-  ClientWidth = 401
+  ClientHeight = 255
+  ClientWidth = 400
   Color = clBtnFace
-  Font.Charset = DEFAULT_CHARSET
+  Font.Charset = RUSSIAN_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
   Font.Style = []
   OldCreateOrder = False
-  Position = poDesigned
+  Position = poDefault
   PixelsPerInch = 96
-  TextHeight = 13
+  TextHeight = 14
   object XiPanel1: TXiPanel
     Left = 0
     Top = 0
-    Width = 401
-    Height = 254
+    Width = 400
+    Height = 255
     ColorFace = clWhite
     ColorGrad = 14344414
     ColorLight = 8224125
@@ -27,9 +27,9 @@ object logo: Tlogo
     ColorScheme = csSilver
     FillDirection = fdVertical
     Align = alClient
-    Font.Charset = DEFAULT_CHARSET
+    Font.Charset = RUSSIAN_CHARSET
     Font.Color = clNavy
-    Font.Height = -67
+    Font.Height = -72
     Font.Name = 'Times New Roman'
     Font.Pitch = fpFixed
     Font.Style = [fsBold]
@@ -39,8 +39,8 @@ object logo: Tlogo
     object Image1: TImage
       Left = 1
       Top = 1
-      Width = 399
-      Height = 252
+      Width = 398
+      Height = 253
       Align = alClient
       Picture.Data = {
         0A544A504547496D61676531AC0000FFD8FFE000104A46494600010201004800
@@ -1421,18 +1421,19 @@ object logo: Tlogo
         56FB62AEC55DDB15762AEED8ABB15762AEC55D8AB631568F5C55761090D1EB92
         082BC6326255EDFA1CA0A62B9FA9C8B6043C9F67261949676C9B53B1570C55BC
         55D8AB5DF156B156F156F1568E2AEC55D8AB58AB78AB43156F15762AFF00FFD9}
+      ExplicitHeight = 264
     end
     object lbOs: TLabel
-      Left = 152
-      Top = 197
-      Width = 71
-      Height = 15
+      Left = 156
+      Top = 196
+      Width = 53
+      Height = 16
       BiDiMode = bdLeftToRight
-      Caption = 'Windows XP'
+      Caption = 'Windows'
       Color = clBtnFace
-      Font.Charset = DEFAULT_CHARSET
+      Font.Charset = RUSSIAN_CHARSET
       Font.Color = 6645094
-      Font.Height = -13
+      Font.Height = -14
       Font.Name = 'Times New Roman'
       Font.Pitch = fpFixed
       Font.Style = []
@@ -1444,16 +1445,16 @@ object logo: Tlogo
       Transparent = True
     end
     object lbCPU: TLabel
-      Left = 60
-      Top = 216
-      Width = 80
-      Height = 15
+      Left = 65
+      Top = 215
+      Width = 85
+      Height = 16
       BiDiMode = bdLeftToRight
       Caption = #1086#1087#1088#1077#1076#1077#1083#1077#1085#1080#1077'...'
       Color = clBtnFace
-      Font.Charset = DEFAULT_CHARSET
+      Font.Charset = RUSSIAN_CHARSET
       Font.Color = 6645094
-      Font.Height = -13
+      Font.Height = -14
       Font.Name = 'Times New Roman'
       Font.Pitch = fpFixed
       Font.Style = []
@@ -1465,16 +1466,16 @@ object logo: Tlogo
       Transparent = True
     end
     object lbStatus: TLabel
-      Left = 72
+      Left = 78
       Top = 233
-      Width = 56
-      Height = 15
+      Width = 63
+      Height = 16
       BiDiMode = bdLeftToRight
       Caption = #1079#1072#1075#1088#1091#1079#1082#1072'...'
       Color = clBtnFace
-      Font.Charset = DEFAULT_CHARSET
+      Font.Charset = RUSSIAN_CHARSET
       Font.Color = 6645094
-      Font.Height = -13
+      Font.Height = -14
       Font.Name = 'Times New Roman'
       Font.Pitch = fpFixed
       Font.Style = []
@@ -1486,16 +1487,16 @@ object logo: Tlogo
       Transparent = True
     end
     object lbVers: TLabel
-      Left = 72
-      Top = 180
-      Width = 24
-      Height = 15
+      Left = 78
+      Top = 178
+      Width = 29
+      Height = 16
       BiDiMode = bdLeftToRight
       Caption = '2.5.6'
       Color = clBtnFace
-      Font.Charset = DEFAULT_CHARSET
+      Font.Charset = RUSSIAN_CHARSET
       Font.Color = 6645094
-      Font.Height = -13
+      Font.Height = -14
       Font.Name = 'Times New Roman'
       Font.Pitch = fpFixed
       Font.Style = []

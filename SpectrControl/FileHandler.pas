@@ -1,4 +1,4 @@
-unit FileHandler;
+﻿unit FileHandler;
 
 interface
 
@@ -53,7 +53,6 @@ begin
 
   DataStream.ReadBuffer(idFormat, sizeof(Ansistring));
   DataStream.ReadBuffer(rcount, SizeOf(rcount));
-//ShowMessage(idformat+IntToStr(rcount));
 
   for i := 0 to rcount - 1 do
   begin
@@ -85,12 +84,8 @@ begin
     offset := Count * sizeof(TPointR);
     Setlength(Matrix, Count);
     DataStream.ReadBuffer(Matrix, offset);
-
-//spectrum := TSpectrum.Create(Self._specrumList,ScaleX,ScaleY,Color,Visible,Parameters,DateTime,Count);
-//spectrum.Matrix:=Matrix;
   end;
 
- //  DataStream.Clear;
   DataStream.Free;
 
 end;

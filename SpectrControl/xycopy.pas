@@ -1,4 +1,4 @@
-unit XYCopy;
+﻿unit XYCopy;
 (*
 This unit is a utility for easy printing and copying of graphs.
 It enables the selection of a mode for copy or print, and to set the printer.
